@@ -131,45 +131,149 @@
     }
 
     // --- Tenant & Lender News ---
+    var tlFilter = 'All';
+    var tlCollapsed = {};
+
+    var LEVELS = ['HIGH', 'MEDIUM', 'LOW', 'GENERAL'];
+    var LEVEL_META = {
+        HIGH:    { icon: '\uD83D\uDD34', desc: 'Bankruptcy \u00b7 Default \u00b7 Fraud \u00b7 Major Legal Action' },
+        MEDIUM:  { icon: '\uD83D\uDFE0', desc: 'Downgrade \u00b7 C-Suite Exit \u00b7 Earnings Miss \u00b7 Regulatory' },
+        LOW:     { icon: '\uD83D\uDFE1', desc: 'Minor Litigation \u00b7 Restructuring Warning \u00b7 Analyst Cuts' },
+        GENERAL: { icon: '\u26AA',        desc: 'Neutral or Positive Developments' },
+    };
+
     function renderTenantLenderNews() {
-        var container = document.getElementById('tl-content');
-        if (!container || !TENANT_LENDER_NEWS) return;
+        if (!TENANT_LENDER_NEWS) return;
+        renderTLFilters();
+        renderTLContent();
+        renderTLWatchlist();
+    }
 
-        var data = TENANT_LENDER_NEWS;
-        var html = '';
+    function renderTLFilters() {
+        var el = document.getElementById('tl-filters');
+        if (!el) return;
+        var cats = ['All', 'Tenant', 'Lender', 'Equity Partner'];
+        el.innerHTML = cats.map(function (c) {
+            return '<button class="tl-filter-btn' + (tlFilter === c ? ' active' : '') + '" data-tlfilter="' + c + '">' + c + '</button>';
+        }).join('');
 
-        if (data.sections) {
-            data.sections.forEach(function (section) {
-                html += '<div class="tl-section">';
-                html += '<h3 class="tl-section-title">' + section.title + '</h3>';
-
-                section.items.forEach(function (item) {
-                    var sentimentClass = item.sentiment || 'neutral';
-                    html += '<div class="tl-card">' +
-                        '<div class="tl-card-header">' +
-                        '<span class="tl-card-company">' + item.company + '</span>' +
-                        '<span class="tl-card-tag ' + item.tag + ' ' + sentimentClass + '">' +
-                        item.tag + ' &middot; ' + sentimentClass +
-                        '</span>' +
-                        '</div>' +
-                        '<div class="tl-card-body">' + item.body + '</div>';
-
-                    if (item.source) {
-                        html += '<div class="tl-card-source">' + item.source;
-                        if (item.url) {
-                            html += ' &mdash; <a href="' + item.url + '" target="_blank" rel="noopener">Read more</a>';
-                        }
-                        html += '</div>';
-                    }
-
-                    html += '</div>';
-                });
-
-                html += '</div>';
+        el.querySelectorAll('.tl-filter-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                tlFilter = btn.getAttribute('data-tlfilter');
+                renderTLFilters();
+                renderTLContent();
+                renderTLWatchlist();
             });
+        });
+    }
+
+    function renderTLContent() {
+        var data = TENANT_LENDER_NEWS;
+        var alerts = data.alerts || [];
+
+        // Filter by category
+        var filtered = tlFilter === 'All' ? alerts : alerts.filter(function (a) { return a.cat === tlFilter; });
+
+        // Group by level
+        var byLevel = {};
+        LEVELS.forEach(function (l) { byLevel[l] = []; });
+        filtered.forEach(function (a) { if (byLevel[a.level]) byLevel[a.level].push(a); });
+
+        // Stats
+        var statsEl = document.getElementById('tl-stats');
+        if (statsEl) {
+            statsEl.innerHTML = [
+                { lvl: 'HIGH',   count: byLevel.HIGH.length,   label: 'High alerts' },
+                { lvl: 'MEDIUM', count: byLevel.MEDIUM.length, label: 'Medium alerts' },
+                { lvl: 'LOW',    count: byLevel.LOW.length,    label: 'Low alerts' },
+                { lvl: 'GENERAL',count: byLevel.GENERAL.length,label: 'General' },
+            ].map(function (s) {
+                return '<div class="tl-stat severity-' + s.lvl + '" style="background: var(--sev-bg); border-color: var(--sev-border);">' +
+                    '<div class="tl-stat-num" style="color: var(--sev-text);">' + s.count + '</div>' +
+                    '<div class="tl-stat-label">' + s.label + '</div></div>';
+            }).join('');
         }
 
-        container.innerHTML = html;
+        // Alert sections
+        var alertsEl = document.getElementById('tl-alerts');
+        if (!alertsEl) return;
+
+        var html = '';
+        LEVELS.forEach(function (lvl) {
+            var items = byLevel[lvl];
+            if (lvl === 'GENERAL' && items.length === 0) return;
+            var meta = LEVEL_META[lvl];
+            var col = tlCollapsed[lvl];
+
+            html += '<div class="tl-level-section severity-' + lvl + '">';
+
+            // Header
+            html += '<div class="tl-level-header' + (col ? ' collapsed' : '') + '" data-level="' + lvl + '">' +
+                '<div class="tl-level-left">' +
+                '<span class="tl-level-badge">' + lvl + '</span>' +
+                '<span class="tl-level-title">' + meta.icon + ' ' + lvl + ' ALERTS</span>' +
+                '<span class="tl-level-desc">' + meta.desc + '</span>' +
+                '</div>' +
+                '<div class="tl-level-right">' +
+                '<span class="tl-level-count">' + items.length + '</span>' +
+                '<span class="tl-level-chevron">' + (col ? '\u25BC' : '\u25B2') + '</span>' +
+                '</div></div>';
+
+            // Body
+            if (!col) {
+                html += '<div class="tl-level-body">';
+                if (items.length === 0) {
+                    html += '<div class="tl-empty">No ' + lvl.toLowerCase() + ' alerts found across monitored companies</div>';
+                } else {
+                    items.forEach(function (a) {
+                        html += '<div class="tl-alert">' +
+                            '<div class="tl-alert-headline">' + a.headline + '</div>' +
+                            '<div class="tl-alert-summary">' + a.summary + '</div>';
+                        if (a.relevance) {
+                            html += '<div class="tl-alert-relevance">' + a.relevance + '</div>';
+                        }
+                        html += '<div class="tl-alert-meta">' +
+                            '<span class="tl-meta-tag">' + a.company + '</span>' +
+                            '<span class="tl-meta-cat">' + a.cat + '</span>';
+                        if (a.source) html += '<span class="tl-meta-source">' + a.source + '</span>';
+                        if (a.date) html += '<span class="tl-meta-source">\u00b7 ' + a.date + '</span>';
+                        html += '</div></div>';
+                    });
+                }
+                html += '</div>';
+            }
+
+            html += '</div>';
+        });
+
+        alertsEl.innerHTML = html;
+
+        // Attach collapse listeners
+        alertsEl.querySelectorAll('.tl-level-header').forEach(function (hdr) {
+            hdr.addEventListener('click', function () {
+                var lvl = hdr.getAttribute('data-level');
+                tlCollapsed[lvl] = !tlCollapsed[lvl];
+                renderTLContent();
+            });
+        });
+    }
+
+    function renderTLWatchlist() {
+        var el = document.getElementById('tl-watchlist');
+        if (!el || !TENANT_LENDER_NEWS.companies) return;
+
+        var companies = TENANT_LENDER_NEWS.companies;
+        if (tlFilter !== 'All') {
+            companies = companies.filter(function (c) { return c.cat === tlFilter; });
+        }
+
+        el.innerHTML = companies.map(function (co) {
+            var catClass = 'cat-' + co.cat.replace(/\s+/g, '-');
+            return '<div class="tl-watchlist-item">' +
+                '<span class="name">' + co.name + '</span>' +
+                '<span class="cat-tag ' + catClass + '">' + co.cat + '</span>' +
+                '</div>';
+        }).join('');
     }
 
     // --- Helpers ---

@@ -409,80 +409,248 @@ body {
 .stock-table td.num.down { color: var(--danger); }
 
 /* --- Tenant & Lender News --- */
-.tl-content {
-    max-width: 800px;
+.tl-content { max-width: 900px; }
+
+/* Stats bar */
+.tl-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+}
+.tl-stat {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    text-align: center;
+}
+.tl-stat-num {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+}
+.tl-stat-label {
+    font-size: 0.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-sec);
+    margin-top: 6px;
 }
 
-.tl-section {
-    margin-bottom: 40px;
+/* Severity colors */
+.severity-HIGH    { --sev-bg: #FEF2F2; --sev-border: #FECACA; --sev-badge: #DC2626; --sev-text: #991B1B; --sev-accent: #B91C1C; }
+.severity-MEDIUM  { --sev-bg: #FFF7ED; --sev-border: #FED7AA; --sev-badge: #EA580C; --sev-text: #9A3412; --sev-accent: #C2560A; }
+.severity-LOW     { --sev-bg: #FEFCE8; --sev-border: #FEF08A; --sev-badge: #CA8A04; --sev-text: #854D0E; --sev-accent: #A88000; }
+.severity-GENERAL { --sev-bg: var(--accent-light); --sev-border: var(--border); --sev-badge: var(--accent); --sev-text: var(--accent); --sev-accent: var(--accent); }
+
+/* Section header (collapsible) */
+.tl-level-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    cursor: pointer;
+    background: var(--sev-bg);
+    border: 1px solid var(--sev-border);
+    border-radius: var(--radius) var(--radius) 0 0;
+    user-select: none;
+    transition: background 0.15s ease;
 }
-.tl-section-title {
+.tl-level-header.collapsed { border-radius: var(--radius); }
+.tl-level-header:hover { filter: brightness(0.97); }
+
+.tl-level-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.tl-level-badge {
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 4px;
+    background: var(--sev-badge);
+    color: #fff;
+}
+.tl-level-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--sev-text);
+}
+.tl-level-desc {
+    font-size: 0.7rem;
+    color: var(--text-sec);
+    display: none;
+}
+@media (min-width: 700px) { .tl-level-desc { display: inline; } }
+
+.tl-level-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.tl-level-count {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--sev-text);
+}
+.tl-level-chevron {
+    color: var(--text-sec);
+    font-size: 0.75rem;
+}
+
+/* Alert cards */
+.tl-level-body {
+    border: 1px solid var(--sev-border);
+    border-top: none;
+    border-radius: 0 0 var(--radius) var(--radius);
+    overflow: hidden;
+}
+.tl-empty {
+    padding: 16px;
+    text-align: center;
+    color: var(--text-sec);
+    font-size: 0.8rem;
+    background: var(--sev-bg);
+}
+
+.tl-alert {
+    background: var(--sev-bg);
+    border-left: 3px solid var(--sev-badge);
+    padding: 14px 18px;
+}
+.tl-alert + .tl-alert { border-top: 1px solid var(--sev-border); }
+
+.tl-alert-headline {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--text);
+    margin-bottom: 4px;
+    line-height: 1.4;
+}
+.tl-alert-summary {
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: #374151;
+    margin-bottom: 8px;
+}
+.tl-alert-summary b, .tl-alert-summary strong { color: var(--text); }
+
+.tl-alert-relevance {
+    font-size: 0.75rem;
+    font-style: italic;
+    color: var(--sev-text);
+    margin-bottom: 8px;
+    line-height: 1.5;
+    padding-left: 18px;
+    position: relative;
+}
+.tl-alert-relevance::before {
+    content: '\1F4A1';
+    position: absolute;
+    left: 0;
+    font-style: normal;
+}
+
+.tl-alert-meta {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.tl-meta-tag {
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+}
+.tl-meta-cat {
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    border-radius: 3px;
+    background: var(--surface);
+    color: var(--text-sec);
+}
+.tl-meta-source {
+    font-size: 0.7rem;
+    color: var(--text-ter);
+}
+
+/* Level section wrapper */
+.tl-level-section { margin-bottom: 12px; }
+
+/* Watchlist sidebar (within tenant/lender section) */
+.tl-watchlist {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+}
+.tl-watchlist-title {
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     color: var(--text);
     margin-bottom: 16px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid var(--accent);
-    display: inline-block;
 }
-
-.tl-card {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px 24px;
-    margin-bottom: 16px;
-    transition: box-shadow 0.2s ease;
+.tl-watchlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px;
 }
-.tl-card:hover {
-    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-}
-.tl-card-header {
+.tl-watchlist-item {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 8px;
-    gap: 12px;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 0.8rem;
 }
-.tl-card-company {
-    font-weight: 600;
-    font-size: 0.95rem;
-    color: var(--text);
-}
-.tl-card-tag {
-    font-size: 0.65rem;
+.tl-watchlist-item .name { font-weight: 500; color: var(--text); }
+.tl-watchlist-item .cat-tag {
+    font-size: 0.6rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-    padding: 3px 10px;
-    border-radius: 100px;
-    flex-shrink: 0;
-    white-space: nowrap;
+    letter-spacing: 0.03em;
+    padding: 2px 6px;
+    border-radius: 3px;
 }
-.tl-card-tag.tenant   { background: #DBEAFE; color: #1E40AF; }
-.tl-card-tag.lender   { background: #FEF3C7; color: #92400E; }
-.tl-card-tag.positive { background: #D1FAE5; color: #065F46; }
-.tl-card-tag.negative { background: #FEE2E2; color: #991B1B; }
-.tl-card-tag.neutral  { background: var(--surface); color: var(--text-sec); }
+.cat-Tenant         { background: #DBEAFE; color: #1E40AF; }
+.cat-Lender         { background: #FEF3C7; color: #92400E; }
+.cat-Equity-Partner { background: #E0E7FF; color: #3730A3; }
 
-.tl-card-body {
-    font-size: 0.875rem;
-    line-height: 1.6;
-    color: #374151;
+/* Filter tabs for TL section */
+.tl-filters {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
 }
-.tl-card-body b, .tl-card-body strong { color: var(--text); }
-.tl-card-source {
-    font-size: 0.7rem;
-    color: var(--text-ter);
-    margin-top: 10px;
+.tl-filter-btn {
+    background: none;
+    border: 1px solid var(--border);
+    padding: 5px 14px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-sec);
+    cursor: pointer;
+    transition: all 0.15s ease;
 }
-.tl-card-source a {
-    color: var(--accent);
-    text-decoration: none;
+.tl-filter-btn:hover { border-color: var(--accent); color: var(--text); }
+.tl-filter-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    font-weight: 600;
 }
-.tl-card-source a:hover { text-decoration: underline; }
 
 /* --- Footer --- */
 .site-footer {

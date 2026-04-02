@@ -15,7 +15,7 @@ const FRIDAY_FINANCE = {
         { symbol: "DJIA", price: "46,565", change_pct: 0.48 },
         { symbol: "IXIC", price: "21,840", change_pct: 1.16 },
         { symbol: "PLD",  price: "134.20", change_pct: 0.8 },
-        { symbol: "HST",  price: "16.80", change_pct: 0.7 },
+        { symbol: "HST",  price: "18.84", change_pct: 0.8 },
         { symbol: "BX",   price: "111.00", change_pct: 1.3 },
         { symbol: "AMZN", price: "208.27", change_pct: 1.1 },
         { symbol: "MAR",  price: "317.54", change_pct: 0.9 },
@@ -25,14 +25,14 @@ const FRIDAY_FINANCE = {
     ],
 
     news_bullets: [
-        "<b>U.S.–Iran war dominated markets for the fourth consecutive week</b> as the Strait of Hormuz closure continued to roil global energy and risk-asset prices. Tuesday saw a 1,125-point Dow surge after Trump signaled a strike pause — only for markets to reverse sharply Wednesday when Iran denied ceasefire talks, pulling the S&P to its lowest close since September. A late-day <b>WSJ report</b> that Trump told aides he'd accept ending hostilities even without Hormuz reopening triggered a partial recovery. The S&P 500 closed Q1 2026 down <b>4.7%</b> — its worst quarter since 2022 — with Trump's <b>April 6 diplomatic deadline</b> for Iran the single most consequential near-term macro variable.",
-        "Oil prices breached <b>$100/barrel (Brent)</b> for the first time in years as the Hormuz closure cut off roughly 20% of global supply. The <b>IEA called it the largest supply disruption in the history of the global oil market.</b> National average gas prices hit <b>$4.018/gallon</b> — the highest since August 2022 — while diesel reached $5.45/gallon, adding direct pressure to logistics costs and CRE operating budgets. An FT investigation revealed <b>$580 million in bets placed against oil prices just 15 minutes before Trump announced his March 23 strike pause</b>, triggering SEC scrutiny of potential insider trading.",
-        "The <b>FOMC voted to hold rates at 3.50%–3.75%</b> at its March 18 meeting, with only one dissenter (Governor Miran, favoring a cut). Chair Powell acknowledged <b>\"uncertain\" conditions</b> but characterized the oil-shock disruption as potentially transitory. Markets briefly priced a non-trivial probability of a <b>rate hike</b> later in 2026 — the first such signal since the tightening cycle ended — as $100+ oil threatens to re-accelerate inflation. CME FedWatch shows <b>~86% probability of another hold</b> at the April 28–29 FOMC meeting. The 10-year Treasury yield surged roughly <b>40 basis points in March</b> to 4.40% on stagflation fears before stabilizing.",
-        "<b>February nonfarm payrolls fell 92,000</b> — the worst monthly print in four months and far below the +59K consensus — with declines in healthcare (strike activity), information, federal government, and manufacturing. The <b>March NFP report</b> was released Good Friday (April 3) while equity markets were closed, creating an unusually high-stakes Monday open. Average hourly earnings rose <b>+3.8% YoY</b>, keeping the Fed's dual-mandate tension acute. Wells Fargo characterized the mix of weakening jobs and rising inflation as <b>\"the FOMC's worst nightmare.\"</b>",
-        "Earnings diverged sharply: <b>Nike (NKE) plunged ~14%</b> after guiding China revenue down 20% next quarter, while <b>Micron (MU) surged 10.9%</b> on strong memory chip demand and a record market cap. <b>Eli Lilly (LLY) gained 3.9%</b> on FDA approval of its GLP-1 weight-loss pill, and <b>Alphabet (GOOGL) rose 3.0%</b>. On the other end, <b>RH (Restoration Hardware) fell 18%</b> on below-consensus revenue guidance, while gold — up ~22% YTD entering March — posted its largest monthly decline since 2013 as ceasefire signals dampened safe-haven demand."
+        "<b>U.S.\u2013Iran war dominated markets for the fourth consecutive week</b> as the Strait of Hormuz closure continued to roil global energy and risk-asset prices. Tuesday saw a 1,125-point Dow surge after Trump signaled a strike pause \u2014 only for markets to reverse sharply Wednesday when Iran denied ceasefire talks, pulling the S&P to its lowest close since September. A late-day <b>WSJ report</b> that Trump told aides he\u2019d accept ending hostilities even without Hormuz reopening triggered a partial recovery. The S&P 500 closed Q1 2026 down <b>4.7%</b> \u2014 its worst quarter since 2022 \u2014 with Trump\u2019s <b>April 6 diplomatic deadline</b> for Iran the single most consequential near-term macro variable.",
+        "Oil prices breached <b>$100/barrel (Brent)</b> for the first time in years as the Hormuz closure cut off roughly 20% of global supply. The <b>IEA called it the largest supply disruption in the history of the global oil market.</b> National average gas prices hit <b>$4.018/gallon</b> \u2014 the highest since August 2022 \u2014 while diesel reached $5.45/gallon, adding direct pressure to logistics costs and CRE operating budgets. An FT investigation revealed <b>$580 million in bets placed against oil prices just 15 minutes before Trump announced his March 23 strike pause</b>, triggering SEC scrutiny of potential insider trading.",
+        "The <b>FOMC voted to hold rates at 3.50%\u20133.75%</b> at its March 18 meeting, with only one dissenter (Governor Miran, favoring a cut). Chair Powell acknowledged <b>\u201cuncertain\u201d conditions</b> but characterized the oil-shock disruption as potentially transitory. Markets briefly priced a non-trivial probability of a <b>rate hike</b> later in 2026 \u2014 the first such signal since the tightening cycle ended \u2014 as $100+ oil threatens to re-accelerate inflation. CME FedWatch shows <b>~86% probability of another hold</b> at the April 28\u201329 FOMC meeting. The 10-year Treasury yield surged roughly <b>40 basis points in March</b> to 4.40% on stagflation fears before stabilizing.",
+        "<b>February nonfarm payrolls fell 92,000</b> \u2014 the worst monthly print in four months and far below the +59K consensus \u2014 with declines in healthcare (strike activity), information, federal government, and manufacturing. The <b>March NFP report</b> was released Good Friday (April 3) while equity markets were closed, creating an unusually high-stakes Monday open. Average hourly earnings rose <b>+3.8% YoY</b>, keeping the Fed\u2019s dual-mandate tension acute. Wells Fargo characterized the mix of weakening jobs and rising inflation as <b>\u201cthe FOMC\u2019s worst nightmare.\u201d</b>",
+        "Earnings diverged sharply: <b>Nike (NKE) plunged ~14%</b> after guiding China revenue down 20% next quarter, while <b>Micron (MU) surged 10.9%</b> on strong memory chip demand and a record market cap. <b>Eli Lilly (LLY) gained 3.9%</b> on FDA approval of its GLP-1 weight-loss pill, and <b>Alphabet (GOOGL) rose 3.0%</b>. On the other end, <b>RH (Restoration Hardware) fell 18%</b> on below-consensus revenue guidance, while gold \u2014 up ~22% YTD entering March \u2014 posted its largest monthly decline since 2013 as ceasefire signals dampened safe-haven demand."
     ],
 
-    watch_next_week: "Markets face one of the highest-risk Monday opens of 2026 as traders digest the <b>March NFP report</b> (released Good Friday with markets closed) — consensus expects +57K following February's shocking \u201392K print. <b>Trump's April 6 Iran diplomatic deadline</b> expires over the weekend, with renewed strikes or genuine de-escalation both plausible. <b>FOMC minutes</b> (Wednesday) will be scrutinized for internal debate on the stagflation risk, and <b>March CPI</b> (Friday) will be the most market-moving data of the week — a hot print would reinvigorate rate-hike speculation already visible in the options market.",
+    watch_next_week: "Markets face one of the highest-risk Monday opens of 2026 as traders digest the <b>March NFP report</b> (released Good Friday with markets closed) \u2014 consensus expects +57K following February\u2019s shocking \u201392K print. <b>Trump\u2019s April 6 Iran diplomatic deadline</b> expires over the weekend, with renewed strikes or genuine de-escalation both plausible. <b>FOMC minutes</b> (Wednesday) will be scrutinized for internal debate on the stagflation risk, and <b>March CPI</b> (Friday) will be the most market-moving data of the week \u2014 a hot print would reinvigorate rate-hike speculation already visible in the options market.",
 
     reading_links: [
         {
@@ -45,25 +45,25 @@ const FRIDAY_FINANCE = {
             title: "Gas Prices Hit $4 a Gallon for the First Time Since 2022 Amid Iran War",
             url: "https://time.com/article/2026/03/31/gas-prices-us-iran-war/",
             source: "TIME",
-            description: "The national average reached $4.018/gallon — the highest since August 2022 — as the Strait of Hormuz closure cuts off roughly 20% of global crude supply. Diesel hit $5.45/gallon, with direct consequences for logistics costs and CRE operating budgets."
+            description: "The national average reached $4.018/gallon \u2014 the highest since August 2022 \u2014 as the Strait of Hormuz closure cuts off roughly 20% of global crude supply. Diesel hit $5.45/gallon, with direct consequences for logistics costs and CRE operating budgets."
         },
         {
             title: "Does the Iran War Change the Outlook for the Fed?",
             url: "https://www.morningstar.com/economy/does-iran-war-change-outlook-fed",
             source: "Morningstar",
-            description: "Morningstar's economic team argues the oil shock creates a genuine stagflation risk — slowing growth while pushing energy-driven CPI higher. The piece examines how the Fed could be forced to choose between fighting inflation and supporting a weakening labor market."
+            description: "Morningstar\u2019s economic team argues the oil shock creates a genuine stagflation risk \u2014 slowing growth while pushing energy-driven CPI higher. The piece examines how the Fed could be forced to choose between fighting inflation and supporting a weakening labor market."
         },
         {
             title: "What the Iran War Means for Oil, Inflation, and Your Portfolio",
             url: "https://www.morganstanley.com/insights/articles/iran-war-oil-inflation-stock-market-2026",
             source: "Morgan Stanley",
-            description: "Morgan Stanley's strategists assess three scenarios for Hormuz — reopening within 30 days, 60\u201390 day closure, and extended disruption — and their respective impacts on Brent crude, core PCE, and equity sector positioning."
+            description: "Morgan Stanley\u2019s strategists assess three scenarios for Hormuz \u2014 reopening within 30 days, 60\u201390 day closure, and extended disruption \u2014 and their respective impacts on Brent crude, core PCE, and equity sector positioning."
         },
         {
-            title: "Weekly Market Commentary — March 30, 2026",
+            title: "Weekly Market Commentary \u2014 March 30, 2026",
             url: "https://blog.swbc.com/investmenthub/market-commentary-week-of-march-30-2026",
             source: "SWBC Investment Hub",
-            description: "A concise institutional wrap of the week's macro events covering Fed posture, Q1 equity performance, credit market conditions, and the key economic releases on the calendar for the week of April 6."
+            description: "A concise institutional wrap of the week\u2019s macro events covering Fed posture, Q1 equity performance, credit market conditions, and the key economic releases on the calendar for the week of April 6."
         }
     ],
 
@@ -93,7 +93,7 @@ const FRIDAY_FINANCE = {
             { company: "Ryman Hospitality",       ticker: "RHP",  price: 94.44,  day_pct: 0.5,  ytd_pct: -8.1,  high_52w: 118.00, vs_high: -20.0, low_52w: 80.20,  vs_low: 17.8 }
         ],
         "Hospitality REITs": [
-            { company: "Host Hotels & Resorts",   ticker: "HST",  price: 16.80, day_pct: 0.7,  ytd_pct: -9.2,  high_52w: 20.40,  vs_high: -17.6, low_52w: 13.10, vs_low: 28.2 },
+            { company: "Host Hotels & Resorts",   ticker: "HST",  price: 18.84, day_pct: 0.8,  ytd_pct: -3.8,  high_52w: 21.00,  vs_high: -10.3, low_52w: 12.12, vs_low: 55.4 },
             { company: "Apple REIT",              ticker: "APLE", price: 11.89, day_pct: 0.3,  ytd_pct: -9.3,  high_52w: 14.80,  vs_high: -19.7, low_52w: 10.40, vs_low: 14.3 },
             { company: "Park Hotels & Resorts",   ticker: "PK",   price: 10.92, day_pct: 0.6,  ytd_pct: -11.0, high_52w: 14.10,  vs_high: -22.6, low_52w: 9.60,  vs_low: 13.8 },
             { company: "Pebblebrook Hotel",       ticker: "PEB",  price: 11.34, day_pct: 0.4,  ytd_pct: -12.2, high_52w: 14.40,  vs_high: -21.3, low_52w: 10.20, vs_low: 11.2 },
@@ -103,19 +103,19 @@ const FRIDAY_FINANCE = {
             { company: "Summit Hotel Properties", ticker: "INN",  price: 5.36,  day_pct: 0.2,  ytd_pct: -13.4, high_52w: 7.10,   vs_high: -24.5, low_52w: 4.80,  vs_low: 11.7 }
         ],
         "Lenders": [
-            { company: "Blackstone",       ticker: "BX",   price: 111.00, day_pct: 1.3,  ytd_pct: -27.2, high_52w: 190.87, vs_high: -41.9, low_52w: 88.20,  vs_low: 25.9 },
-            { company: "Comerica",         ticker: "CMA",  price: 88.67,  day_pct: 0.5,  ytd_pct: -5.2,  high_52w: 102.40, vs_high: -13.4, low_52w: 72.30,  vs_low: 22.6 },
-            { company: "Veritex",          ticker: "VBTX", price: 30.26,  day_pct: 0.8,  ytd_pct: -7.8,  high_52w: 34.96,  vs_high: -13.5, low_52w: 20.37,  vs_low: 48.6 },
-            { company: "BancFirst",        ticker: "BANF", price: 116.50, day_pct: 0.3,  ytd_pct: -2.1,  high_52w: 138.00, vs_high: -15.6, low_52w: 97.00,  vs_low: 20.1 },
-            { company: "Busey",            ticker: "BUSE", price: 25.50,  day_pct: 0.4,  ytd_pct: -4.8,  high_52w: 30.40,  vs_high: -16.1, low_52w: 22.10,  vs_low: 15.4 },
-            { company: "Bank OZK",         ticker: "OZK",  price: 44.85,  day_pct: 0.6,  ytd_pct: -7.3,  high_52w: 53.66,  vs_high: -16.4, low_52w: 35.71,  vs_low: 25.6 },
-            { company: "The Hartford",     ticker: "HIG",  price: 134.41, day_pct: 0.4,  ytd_pct: 5.2,   high_52w: 144.50, vs_high: -7.0,  low_52w: 107.49, vs_low: 25.0 }
+            { company: "Blackstone",          ticker: "BX",   price: 111.00, day_pct: 1.3,  ytd_pct: -27.2, high_52w: 190.87, vs_high: -41.9, low_52w: 88.20,  vs_low: 25.9 },
+            { company: "Fifth Third Bancorp", ticker: "FITB", price: 43.28,  day_pct: 2.24, ytd_pct: -4.2,  high_52w: 46.80,  vs_high: -7.5,  low_52w: 31.20,  vs_low: 38.7 },
+            { company: "Veritex",             ticker: "VBTX", price: 30.26,  day_pct: 0.8,  ytd_pct: -7.8,  high_52w: 34.96,  vs_high: -13.5, low_52w: 20.37,  vs_low: 48.6 },
+            { company: "BancFirst",           ticker: "BANF", price: 116.50, day_pct: 0.3,  ytd_pct: -2.1,  high_52w: 138.00, vs_high: -15.6, low_52w: 97.00,  vs_low: 20.1 },
+            { company: "Busey",               ticker: "BUSE", price: 24.51,  day_pct: 0.3,  ytd_pct: -8.1,  high_52w: 30.40,  vs_high: -19.4, low_52w: 22.10,  vs_low: 10.9 },
+            { company: "Bank OZK",            ticker: "OZK",  price: 44.85,  day_pct: 0.6,  ytd_pct: -7.3,  high_52w: 53.66,  vs_high: -16.4, low_52w: 35.71,  vs_low: 25.6 },
+            { company: "The Hartford",        ticker: "HIG",  price: 134.41, day_pct: 0.4,  ytd_pct: 5.2,   high_52w: 144.50, vs_high: -7.0,  low_52w: 107.49, vs_low: 25.0 }
         ],
         "Industry-related companies": [
             { company: "Amazon",               ticker: "AMZN", price: 208.27, day_pct: 1.1,  ytd_pct: -10.0, high_52w: 258.00, vs_high: -19.3, low_52w: 161.02, vs_low: 29.3 },
             { company: "United Parcel Service", ticker: "UPS", price: 98.07,  day_pct: 0.8,  ytd_pct: -11.8, high_52w: 122.40, vs_high: -19.9, low_52w: 82.25,  vs_low: 19.2 },
             { company: "FedEx Corporation",    ticker: "FDX",  price: 352.00, day_pct: 1.5,  ytd_pct: -6.1,  high_52w: 398.50, vs_high: -11.7, low_52w: 282.00, vs_low: 24.8 },
-            { company: "Target Corporation",   ticker: "TGT",  price: 119.84, day_pct: 0.9,  ytd_pct: 4.0,   high_52w: 126.00, vs_high: -4.9,  low_52w: 83.44,  vs_low: 43.6 },
+            { company: "Target Corporation",   ticker: "TGT",  price: 116.37, day_pct: -0.5, ytd_pct: 0.8,   high_52w: 126.00, vs_high: -7.6,  low_52w: 83.44,  vs_low: 39.5 },
             { company: "GXO Logistics",        ticker: "GXO",  price: 51.85,  day_pct: 6.12, ytd_pct: 5.3,   high_52w: 58.20,  vs_high: -10.9, low_52w: 34.80,  vs_low: 48.9 },
             { company: "Marriott International", ticker: "MAR", price: 317.54, day_pct: 0.9,  ytd_pct: -1.5,  high_52w: 370.00, vs_high: -14.2, low_52w: 226.80, vs_low: 40.0 },
             { company: "Hilton Hotels",         ticker: "HLT",  price: 307.36, day_pct: 0.7,  ytd_pct: -2.2,  high_52w: 333.00, vs_high: -7.7,  low_52w: 196.00, vs_low: 56.8 },

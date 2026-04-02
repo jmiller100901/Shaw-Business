@@ -5,6 +5,11 @@ const FRIDAY_FINANCE = {
     date: "April 1, 2026",
     date_short: "4.1.26",
 
+    quote: {
+        text: "The stock market is a device for transferring money from the impatient to the patient.",
+        author: "Warren Buffett"
+    },
+
     ticker_bar: [
         { symbol: "SPX",  price: "6,575", change_pct: 0.72 },
         { symbol: "DJIA", price: "46,565", change_pct: 0.48 },
@@ -12,7 +17,7 @@ const FRIDAY_FINANCE = {
         { symbol: "PLD",  price: "134.20", change_pct: 0.8 },
         { symbol: "HST",  price: "16.80", change_pct: 0.7 },
         { symbol: "BX",   price: "111.00", change_pct: 1.3 },
-        { symbol: "AMZN", price: "208.27", change_pct: 3.64 },
+        { symbol: "AMZN", price: "208.27", change_pct: 1.1 },
         { symbol: "MAR",  price: "317.54", change_pct: 0.9 },
         { symbol: "DAL",  price: "63.00", change_pct: 2.1 },
         { symbol: "AAL",  price: "10.74", change_pct: 1.8 },
@@ -27,7 +32,7 @@ const FRIDAY_FINANCE = {
         "Earnings diverged sharply: <b>Nike (NKE) plunged ~14%</b> after guiding China revenue down 20% next quarter, while <b>Micron (MU) surged 10.9%</b> on strong memory chip demand and a record market cap. <b>Eli Lilly (LLY) gained 3.9%</b> on FDA approval of its GLP-1 weight-loss pill, and <b>Alphabet (GOOGL) rose 3.0%</b>. On the other end, <b>RH (Restoration Hardware) fell 18%</b> on below-consensus revenue guidance, while gold — up ~22% YTD entering March — posted its largest monthly decline since 2013 as ceasefire signals dampened safe-haven demand."
     ],
 
-    watch_next_week: "Markets face one of the highest-risk Monday opens of 2026 as traders digest the <b>March NFP report</b> (released Good Friday with markets closed) — consensus expects +57K following February's shocking –92K print. <b>Trump's April 6 Iran diplomatic deadline</b> expires over the weekend, with renewed strikes or genuine de-escalation both plausible. <b>FOMC minutes</b> (Wednesday) will be scrutinized for internal debate on the stagflation risk, and <b>March CPI</b> (Friday) will be the most market-moving data of the week — a hot print would reinvigorate rate-hike speculation already visible in the options market.",
+    watch_next_week: "Markets face one of the highest-risk Monday opens of 2026 as traders digest the <b>March NFP report</b> (released Good Friday with markets closed) — consensus expects +57K following February's shocking \u201392K print. <b>Trump's April 6 Iran diplomatic deadline</b> expires over the weekend, with renewed strikes or genuine de-escalation both plausible. <b>FOMC minutes</b> (Wednesday) will be scrutinized for internal debate on the stagflation risk, and <b>March CPI</b> (Friday) will be the most market-moving data of the week — a hot print would reinvigorate rate-hike speculation already visible in the options market.",
 
     reading_links: [
         {
@@ -52,7 +57,7 @@ const FRIDAY_FINANCE = {
             title: "What the Iran War Means for Oil, Inflation, and Your Portfolio",
             url: "https://www.morganstanley.com/insights/articles/iran-war-oil-inflation-stock-market-2026",
             source: "Morgan Stanley",
-            description: "Morgan Stanley's strategists assess three scenarios for Hormuz — reopening within 30 days, 60–90 day closure, and extended disruption — and their respective impacts on Brent crude, core PCE, and equity sector positioning."
+            description: "Morgan Stanley's strategists assess three scenarios for Hormuz — reopening within 30 days, 60\u201390 day closure, and extended disruption — and their respective impacts on Brent crude, core PCE, and equity sector positioning."
         },
         {
             title: "Weekly Market Commentary — March 30, 2026",
@@ -107,7 +112,7 @@ const FRIDAY_FINANCE = {
             { company: "The Hartford",     ticker: "HIG",  price: 134.41, day_pct: 0.4,  ytd_pct: 5.2,   high_52w: 144.50, vs_high: -7.0,  low_52w: 107.49, vs_low: 25.0 }
         ],
         "Industry-related companies": [
-            { company: "Amazon",               ticker: "AMZN", price: 208.27, day_pct: 3.64, ytd_pct: -10.0, high_52w: 258.00, vs_high: -19.3, low_52w: 161.02, vs_low: 29.3 },
+            { company: "Amazon",               ticker: "AMZN", price: 208.27, day_pct: 1.1,  ytd_pct: -10.0, high_52w: 258.00, vs_high: -19.3, low_52w: 161.02, vs_low: 29.3 },
             { company: "United Parcel Service", ticker: "UPS", price: 98.07,  day_pct: 0.8,  ytd_pct: -11.8, high_52w: 122.40, vs_high: -19.9, low_52w: 82.25,  vs_low: 19.2 },
             { company: "FedEx Corporation",    ticker: "FDX",  price: 352.00, day_pct: 1.5,  ytd_pct: -6.1,  high_52w: 398.50, vs_high: -11.7, low_52w: 282.00, vs_low: 24.8 },
             { company: "Target Corporation",   ticker: "TGT",  price: 119.84, day_pct: 0.9,  ytd_pct: 4.0,   high_52w: 126.00, vs_high: -4.9,  low_52w: 83.44,  vs_low: 43.6 },

@@ -6,15 +6,9 @@
     'use strict';
 
     // ----------------------------------------------------------------
-    // FMP API key — get a free key at financialmodelingprep.com/developer
-    // Paste your key between the quotes below, then push to GitHub.
+    // Symbol mapping — Yahoo uses caret-prefix for indices
     // ----------------------------------------------------------------
-    var FMP_API_KEY = 'BzMKmnKNNUOaXHSPMARn18MLJ6u6NoNG';
-
-    // ----------------------------------------------------------------
-    // Symbol mapping — FMP uses caret-prefix for indices
-    // ----------------------------------------------------------------
-    var FMP_MAP = {
+    var YAHOO_MAP = {
         'SPX':  '^GSPC',
         'DJIA': '^DJI',
         'DJI':  '^DJI',
@@ -22,14 +16,14 @@
         'COMP': '^IXIC'
     };
 
-    var FMP_REVERSE = {};
-    Object.keys(FMP_MAP).forEach(function (k) {
-        if (!FMP_REVERSE[FMP_MAP[k]]) FMP_REVERSE[FMP_MAP[k]] = k;
+    var YAHOO_REVERSE = {};
+    Object.keys(YAHOO_MAP).forEach(function (k) {
+        if (!YAHOO_REVERSE[YAHOO_MAP[k]]) YAHOO_REVERSE[YAHOO_MAP[k]] = k;
     });
 
     // Yahoo Finance URL for clickable ticker/company links
     function yahooUrl(sym) {
-        return 'https://finance.yahoo.com/quote/' + encodeURIComponent(FMP_MAP[sym] || sym);
+        return 'https://finance.yahoo.com/quote/' + encodeURIComponent(YAHOO_MAP[sym] || sym);
     }
 
     // ----------------------------------------------------------------
@@ -44,11 +38,10 @@
         renderTickerBar();
         renderMasthead();
         renderFridayFinance();
-        renderFredChart();
         renderTenantLenderNews();
         initNav();
-        // Fetch live data after initial paint
-        setTimeout(initLiveStockData, 400);
+        // Fetch live data immediately on every page load
+        initLiveStockData();
     });
 
     // ----------------------------------------------------------------
@@ -101,22 +94,6 @@
         });
     }
 
-    // ----------------------------------------------------------------
-    // FRED Chart (live static image)
-    // ----------------------------------------------------------------
-    function renderFredChart() {
-        var img = document.getElementById('fred-chart-img');
-        if (!img) return;
-        var today     = new Date();
-        var tenYrsAgo = new Date(today);
-        tenYrsAgo.setFullYear(today.getFullYear() - 10);
-        function fmt(d) { return d.toISOString().split('T')[0]; }
-        img.src = 'https://fred.stlouisfed.org/graph/fredgraph.png' +
-            '?id=DFF,DGS10,DGS2' +
-            '&cosd=' + fmt(tenYrsAgo) + '&coed=' + fmt(today) +
-            '&width=640&height=280&bgcolor=%23FFFFFF&graph_bgcolor=%23FFFFFF';
-        img.onerror = function () { img.style.display = 'none'; };
-    }
 
     // ----------------------------------------------------------------
     // Friday Finance Section
@@ -163,14 +140,8 @@
             rateBody.innerHTML = rateHtml;
         }
 
-        // Stock dateline — initial state
-        setStockStatus(
-            'Static data &bull; ' +
-            '<a href="#" id="refresh-live-btn" class="refresh-link">&#8635; Fetch live prices</a>'
-        );
-        bindRefreshBtn();
-
-        // Stock table — initial render from static data
+        // Stock table — show loading state until live data arrives
+        setStockStatus('<span class="loading-badge">&#8635; Loading live data&hellip;</span>');
         renderStockTable();
     }
 
@@ -182,30 +153,41 @@
         var stockBody = document.getElementById('ff-stock-body');
         if (!stockBody || !data.stocks) return;
 
+        var hasLive = Object.keys(liveCache).length > 0;
         var html = '';
         for (var cat in data.stocks) {
             html += '<tr class="cat-row"><td colspan="9">' + cat + '</td></tr>';
             data.stocks[cat].forEach(function (s) {
-                var L     = liveCache[s.ticker];
-                var price = L ? L.price  : s.price;
-                var dayP  = L ? L.dayPct : s.day_pct;
-                var ytdP  = (L && L.ytdPct != null) ? L.ytdPct : s.ytd_pct;
-                var hi    = L ? L.high52 : s.high_52w;
-                var vsH   = L ? L.vsHigh : s.vs_high;
-                var lo    = L ? L.low52  : s.low_52w;
-                var vsL   = L ? L.vsLow  : s.vs_low;
-                var yurl  = yahooUrl(s.ticker);
+                var L    = liveCache[s.ticker];
+                var yurl = yahooUrl(s.ticker);
 
-                html += '<tr data-ticker="' + s.ticker + '">' +
-                    '<td class="company"><a href="' + yurl + '" target="_blank" rel="noopener">' + s.company + '</a></td>' +
-                    '<td class="ticker"><a href="' + yurl + '" target="_blank" rel="noopener">' + s.ticker + '</a></td>' +
-                    '<td class="num">' + fmtPrice(price) + '</td>' +
-                    pctCell(dayP) + pctCell(ytdP) +
-                    '<td class="num">' + fmtPrice(hi) + '</td>' +
-                    pctCell(vsH) +
-                    '<td class="num">' + fmtPrice(lo) + '</td>' +
-                    pctCell(vsL) +
-                    '</tr>';
+                if (hasLive && L) {
+                    // Live data available for this symbol
+                    html += '<tr data-ticker="' + s.ticker + '">' +
+                        '<td class="company"><a href="' + yurl + '" target="_blank" rel="noopener">' + s.company + '</a></td>' +
+                        '<td class="ticker"><a href="' + yurl + '" target="_blank" rel="noopener">' + s.ticker + '</a></td>' +
+                        '<td class="num">' + fmtPrice(L.price) + '</td>' +
+                        pctCell(L.dayPct) + pctCell(L.ytdPct) +
+                        '<td class="num">' + fmtPrice(L.high52) + '</td>' +
+                        pctCell(L.vsHigh) +
+                        '<td class="num">' + fmtPrice(L.low52) + '</td>' +
+                        pctCell(L.vsLow) +
+                        '</tr>';
+                } else if (hasLive && !L) {
+                    // Live fetch ran but this symbol failed
+                    html += '<tr data-ticker="' + s.ticker + '" class="stale-row">' +
+                        '<td class="company"><a href="' + yurl + '" target="_blank" rel="noopener">' + s.company + '</a></td>' +
+                        '<td class="ticker"><a href="' + yurl + '" target="_blank" rel="noopener">' + s.ticker + '</a></td>' +
+                        '<td class="num" colspan="7" style="text-align:center;color:var(--text-ter);font-style:italic;">Data unavailable</td>' +
+                        '</tr>';
+                } else {
+                    // Still loading
+                    html += '<tr data-ticker="' + s.ticker + '">' +
+                        '<td class="company"><a href="' + yurl + '" target="_blank" rel="noopener">' + s.company + '</a></td>' +
+                        '<td class="ticker"><a href="' + yurl + '" target="_blank" rel="noopener">' + s.ticker + '</a></td>' +
+                        '<td class="num" colspan="7" style="text-align:center;color:var(--text-ter);">&mdash;</td>' +
+                        '</tr>';
+                }
             });
         }
         stockBody.innerHTML = html;
@@ -226,80 +208,80 @@
     }
 
     // ----------------------------------------------------------------
-        // Live Data — Financial Modeling Prep API
-    // Phase 1: /quote             → price, day%, 52W (all symbols)
-    // Phase 2: /stock-price-change → YTD (stocks only, indices excluded)
+    // Live Data — Yahoo Finance chart API (via CORS proxy)
+    // Single call per symbol: range=ytd gives price, day%, YTD%, 52W
     // ----------------------------------------------------------------
-    function initLiveStockData() {
-        if (!FMP_API_KEY) {
-            setStockStatus(
-                '<span class="error-badge">FMP API key not configured</span>' +
-                '&nbsp;&bull;&nbsp;Showing static data'
-            );
-            return;
-        }
+    var CORS_PROXY = 'https://corsproxy.io/?url=';
+    var YAHOO_BASE = 'https://query2.finance.yahoo.com/v8/finance/chart/';
 
+    function fetchYahooQuote(symbol) {
+        var yahooSym = YAHOO_MAP[symbol] || symbol;
+        var url = YAHOO_BASE + encodeURIComponent(yahooSym) + '?range=ytd&interval=1d&includePrePost=false';
+        return fetch(CORS_PROXY + encodeURIComponent(url))
+            .then(function (r) { return r.json(); })
+            .then(function (d) {
+                var result = d.chart && d.chart.result && d.chart.result[0];
+                if (!result) throw new Error('No data for ' + symbol);
+                var m      = result.meta;
+                var closes = result.indicators.quote[0].close;
+                var price  = m.regularMarketPrice;
+                var hi     = m.fiftyTwoWeekHigh;
+                var lo     = m.fiftyTwoWeekLow;
+
+                // Day %: current price vs previous trading day close
+                var prevDayClose = (closes.length >= 2) ? closes[closes.length - 2] : m.chartPreviousClose;
+                var dayPct = prevDayClose ? ((price - prevDayClose) / prevDayClose * 100) : 0;
+
+                // YTD %: current price vs last close of prior year (chartPreviousClose with range=ytd)
+                var ytdPct = m.chartPreviousClose ? ((price - m.chartPreviousClose) / m.chartPreviousClose * 100) : null;
+
+                return {
+                    ticker: symbol,
+                    price:  price,
+                    dayPct: dayPct,
+                    ytdPct: ytdPct,
+                    high52: hi,
+                    low52:  lo,
+                    vsHigh: (hi && price) ? ((price - hi) / hi * 100) : null,
+                    vsLow:  (lo && price) ? ((price - lo) / lo * 100) : null
+                };
+            });
+    }
+
+    function initLiveStockData() {
         var symbols = collectAllSymbols();
-        var fmpSyms = symbols.map(function (s) { return FMP_MAP[s] || s; });
-        var symList = fmpSyms.map(encodeURIComponent).join(',');
-        var base    = 'https://financialmodelingprep.com/api/v3/';
 
         setStockStatus('<span class="loading-badge">&#8635; Fetching live prices&hellip;</span>');
 
-        // Phase 1: quotes — price, day%, 52W high/low
-        fetch(base + 'quote/' + symList + '?apikey=' + FMP_API_KEY)
-            .then(function (r) { return r.json(); })
-            .then(function (quotes) {
-                if (!Array.isArray(quotes) || quotes.length === 0) throw new Error('Bad quote response');
+        var promises = symbols.map(function (sym) {
+            return fetchYahooQuote(sym)
+                .then(function (data) { return { status: 'fulfilled', value: data }; })
+                .catch(function (err) { return { status: 'rejected', ticker: sym, reason: err }; });
+        });
 
-                quotes.forEach(function (q) {
-                    var tk    = FMP_REVERSE[q.symbol] || q.symbol;
-                    var price = q.price;
-                    var hi    = q.yearHigh;
-                    var lo    = q.yearLow;
-                    liveCache[tk] = {
-                        price:  price,
-                        dayPct: q.changesPercentage,
-                        high52: hi,
-                        low52:  lo,
-                        vsHigh: (hi && price) ? ((price - hi) / hi * 100) : null,
-                        vsLow:  (lo && price) ? ((price - lo) / lo * 100) : null,
-                        ytdPct: null  // filled by Phase 2
-                    };
+        Promise.all(promises)
+            .then(function (results) {
+                var success = 0;
+                results.forEach(function (r) {
+                    if (r.status === 'fulfilled') {
+                        liveCache[r.value.ticker] = r.value;
+                        success++;
+                    }
                 });
+
+                if (success === 0) throw new Error('All requests failed');
 
                 renderStockTable();
                 renderTickerBar();
-                setStockStatus(
-                    '<span class="live-badge">&#10003; Prices live</span>' +
-                    '&nbsp;&nbsp;<span class="loading-badge">&#8635; Loading YTD&hellip;</span>'
-                );
-
-                // Phase 2: YTD — exclude mapped index symbols (^GSPC etc.)
-                var stockSyms = symbols.filter(function (s) { return !FMP_MAP[s]; });
-                if (!stockSyms.length) return Promise.resolve([]);
-                var stockList = stockSyms.map(encodeURIComponent).join(',');
-                return fetch(base + 'stock-price-change/' + stockList + '?apikey=' + FMP_API_KEY)
-                    .then(function (r) { return r.json(); })
-                    .catch(function () { return []; });
-            })
-            .then(function (changes) {
-                if (!Array.isArray(changes)) return;
-                changes.forEach(function (c) {
-                    if (liveCache[c.symbol] && c.ytd != null) {
-                        liveCache[c.symbol].ytdPct = c.ytd;
-                    }
-                });
-                renderStockTable();
                 var t = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
                 setStockStatus(
-                    '<span class="live-badge">&#10003; All data live &bull; Updated ' + t + '</span>' +
+                    '<span class="live-badge">&#10003; Live data &bull; ' + success + '/' + symbols.length + ' symbols &bull; ' + t + '</span>' +
                     '&nbsp;&nbsp;<a href="#" id="refresh-live-btn" class="refresh-link">&#8635; Refresh</a>'
                 );
                 bindRefreshBtn();
             })
             .catch(function (err) {
-                console.warn('[Shaw Report] FMP error:', err);
+                console.warn('[Shaw Report] Yahoo Finance error:', err);
                 setStockStatus(
                     '<span class="error-badge">Live data unavailable</span>' +
                     '&nbsp;&bull;&nbsp;Showing static data&nbsp;&nbsp;' +
@@ -380,9 +362,20 @@
         });
     }
 
+    var ALERT_MAX_AGE_DAYS = 60;
+
     function renderTLContent() {
         var data     = TENANT_LENDER_NEWS;
         var alerts   = data.alerts || [];
+
+        // Filter out alerts older than 60 days
+        var cutoff = new Date();
+        cutoff.setDate(cutoff.getDate() - ALERT_MAX_AGE_DAYS);
+        alerts = alerts.filter(function (a) {
+            if (!a.date) return true;
+            return new Date(a.date + 'T00:00:00') >= cutoff;
+        });
+
         var filtered = tlFilter === 'All' ? alerts : alerts.filter(function (a) { return a.cat === tlFilter; });
 
         var byLevel = {};

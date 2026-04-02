@@ -226,8 +226,9 @@
     }
 
     // ----------------------------------------------------------------
-    // Phase 1: /quote → price, day%, 52W (all symbols)
-    // Two calls: /quote (price, day%, 52W) + /stock-price-change (YTD)
+        // Live Data — Financial Modeling Prep API
+    // Phase 1: /quote             → price, day%, 52W (all symbols)
+    // Phase 2: /stock-price-change → YTD (stocks only, indices excluded)
     // ----------------------------------------------------------------
     function initLiveStockData() {
         if (!FMP_API_KEY) {
@@ -245,57 +246,69 @@
 
         setStockStatus('<span class="loading-badge">&#8635; Fetching live prices&hellip;</span>');
 
-        Promise.all([
-            fetch(base + 'quote/' + symList + '?apikey=' + FMP_API_KEY).then(function (r) { return r.json(); }),
-            fetch(base + 'stock-price-change/' + symList + '?apikey=' + FMP_API_KEY).then(function (r) { return r.json(); })
-        ])
-        .then(function (results) {
-            var quotes  = Array.isArray(results[0]) ? results[0] : [];
-            var changes = Array.isArray(results[1]) ? results[1] : [];
+        // Phase 1: quotes — price, day%, 52W high/low
+        fetch(base + 'quote/' + symList + '?apikey=' + FMP_API_KEY)
+            .then(function (r) { return r.json(); })
+            .then(function (quotes) {
+                if (!Array.isArray(quotes) || quotes.length === 0) throw new Error('Bad quote response');
 
-            // Build YTD lookup
-            var ytdMap = {};
-            changes.forEach(function (c) {
-                var tk = FMP_REVERSE[c.symbol] || c.symbol;
-                ytdMap[tk] = (c.ytd != null) ? c.ytd : null;
+                quotes.forEach(function (q) {
+                    var tk    = FMP_REVERSE[q.symbol] || q.symbol;
+                    var price = q.price;
+                    var hi    = q.yearHigh;
+                    var lo    = q.yearLow;
+                    liveCache[tk] = {
+                        price:  price,
+                        dayPct: q.changesPercentage,
+                        high52: hi,
+                        low52:  lo,
+                        vsHigh: (hi && price) ? ((price - hi) / hi * 100) : null,
+                        vsLow:  (lo && price) ? ((price - lo) / lo * 100) : null,
+                        ytdPct: null  // filled by Phase 2
+                    };
+                });
+
+                renderStockTable();
+                renderTickerBar();
+                setStockStatus(
+                    '<span class="live-badge">&#10003; Prices live</span>' +
+                    '&nbsp;&nbsp;<span class="loading-badge">&#8635; Loading YTD&hellip;</span>'
+                );
+
+                // Phase 2: YTD — exclude mapped index symbols (^GSPC etc.)
+                var stockSyms = symbols.filter(function (s) { return !FMP_MAP[s]; });
+                if (!stockSyms.length) return Promise.resolve([]);
+                var stockList = stockSyms.map(encodeURIComponent).join(',');
+                return fetch(base + 'stock-price-change/' + stockList + '?apikey=' + FMP_API_KEY)
+                    .then(function (r) { return r.json(); })
+                    .catch(function () { return []; });
+            })
+            .then(function (changes) {
+                if (!Array.isArray(changes)) return;
+                changes.forEach(function (c) {
+                    if (liveCache[c.symbol] && c.ytd != null) {
+                        liveCache[c.symbol].ytdPct = c.ytd;
+                    }
+                });
+                renderStockTable();
+                var t = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                setStockStatus(
+                    '<span class="live-badge">&#10003; All data live &bull; Updated ' + t + '</span>' +
+                    '&nbsp;&nbsp;<a href="#" id="refresh-live-btn" class="refresh-link">&#8635; Refresh</a>'
+                );
+                bindRefreshBtn();
+            })
+            .catch(function (err) {
+                console.warn('[Shaw Report] FMP error:', err);
+                setStockStatus(
+                    '<span class="error-badge">Live data unavailable</span>' +
+                    '&nbsp;&bull;&nbsp;Showing static data&nbsp;&nbsp;' +
+                    '<a href="#" id="refresh-live-btn" class="refresh-link">&#8635; Retry</a>'
+                );
+                bindRefreshBtn();
             });
-
-            // Populate live cache
-            quotes.forEach(function (q) {
-                var tk    = FMP_REVERSE[q.symbol] || q.symbol;
-                var price = q.price;
-                var hi    = q.yearHigh;
-                var lo    = q.yearLow;
-                liveCache[tk] = {
-                    price:  price,
-                    dayPct: q.changesPercentage,
-                    high52: hi,
-                    low52:  lo,
-                    vsHigh: (hi && price) ? ((price - hi) / hi * 100) : null,
-                    vsLow:  (lo && price) ? ((price - lo) / lo * 100) : null,
-                    ytdPct: (ytdMap[tk] != null) ? ytdMap[tk] : null
-                };
-            });
-
-            renderStockTable();
-            renderTickerBar();
-            var t = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            setStockStatus(
-                '<span class="live-badge">&#10003; All data live &bull; Updated ' + t + '</span>' +
-                '&nbsp;&nbsp;<a href="#" id="refresh-live-btn" class="refresh-link">&#8635; Refresh</a>'
-            );
-            bindRefreshBtn();
-        })
-        .catch(function (err) {
-            console.warn('[Shaw Report] FMP error:', err);
-            setStockStatus(
-                '<span class="error-badge">Live data unavailable</span>' +
-                '&nbsp;&bull;&nbsp;Showing static data&nbsp;&nbsp;' +
-                '<a href="#" id="refresh-live-btn" class="refresh-link">&#8635; Retry</a>'
-            );
-            bindRefreshBtn();
-        });
     }
+
 
     // ----------------------------------------------------------------
     // Helpers

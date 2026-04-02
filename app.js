@@ -72,6 +72,11 @@
     function renderMasthead() {
         var el = document.getElementById('masthead-date');
         if (el) el.textContent = FRIDAY_FINANCE.date;
+        var q = FRIDAY_FINANCE.quote;
+        var qEl = document.getElementById('masthead-quote');
+        if (qEl && q) {
+            qEl.innerHTML = '&ldquo;' + q.text + '&rdquo; &mdash; ' + q.author;
+        }
     }
 
     // ----------------------------------------------------------------

@@ -85,7 +85,6 @@ const FRIDAY_FINANCE = {
             { company: "Rexford Industrial",    ticker: "REXR", price: 32.50,  day_pct: -2.1, ytd_pct: -14.0, high_52w: 44.38,  vs_high: -26.8, low_52w: 29.68,  vs_low: 9.5 },
             { company: "EastGroup Properties",  ticker: "EGP",  price: 162.00, day_pct: -3.0, ytd_pct: -9.8,  high_52w: 185.40, vs_high: -12.6, low_52w: 143.20, vs_low: 13.1 },
             { company: "First Industrial",      ticker: "FR",   price: 48.60,  day_pct: -4.0, ytd_pct: -8.2,  high_52w: 56.50,  vs_high: -14.0, low_52w: 42.80,  vs_low: 13.6 },
-            { company: "Plymouth Industrial",   ticker: "PLYM", price: 20.24,  day_pct: -1.0, ytd_pct: -11.5, high_52w: 24.80,  vs_high: -18.4, low_52w: 17.90,  vs_low: 13.1 },
             { company: "Terreno Realty",         ticker: "TRNO", price: 55.52,  day_pct: -5.0, ytd_pct: -12.1, high_52w: 67.30,  vs_high: -17.5, low_52w: 48.10,  vs_low: 15.4 },
             { company: "Stag Industrial",        ticker: "STAG", price: 34.83,  day_pct: -2.0, ytd_pct: -5.2,  high_52w: 40.10,  vs_high: -13.1, low_52w: 31.20,  vs_low: 11.6 },
             { company: "Americold Realty",        ticker: "COLD", price: 23.05,  day_pct: -1.0, ytd_pct: -6.8,  high_52w: 28.50,  vs_high: -19.1, low_52w: 19.80,  vs_low: 16.4 },
@@ -105,7 +104,7 @@ const FRIDAY_FINANCE = {
         "Lenders": [
             { company: "Blackstone",          ticker: "BX",   price: 111.00, day_pct: 1.3,  ytd_pct: -27.2, high_52w: 190.87, vs_high: -41.9, low_52w: 88.20,  vs_low: 25.9 },
             { company: "Fifth Third Bancorp", ticker: "FITB", price: 43.28,  day_pct: 2.24, ytd_pct: -4.2,  high_52w: 46.80,  vs_high: -7.5,  low_52w: 31.20,  vs_low: 38.7 },
-            { company: "Veritex",             ticker: "VBTX", price: 30.26,  day_pct: 0.8,  ytd_pct: -7.8,  high_52w: 34.96,  vs_high: -13.5, low_52w: 20.37,  vs_low: 48.6 },
+            { company: "Huntington Bancshares", ticker: "HBAN", price: 16.50,  day_pct: 0.5,  ytd_pct: -5.0,  high_52w: 19.50,  vs_high: -15.4, low_52w: 12.30,  vs_low: 34.1 },
             { company: "BancFirst",           ticker: "BANF", price: 116.50, day_pct: 0.3,  ytd_pct: -2.1,  high_52w: 138.00, vs_high: -15.6, low_52w: 97.00,  vs_low: 20.1 },
             { company: "Busey",               ticker: "BUSE", price: 24.51,  day_pct: 0.3,  ytd_pct: -8.1,  high_52w: 30.40,  vs_high: -19.4, low_52w: 22.10,  vs_low: 10.9 },
             { company: "Bank OZK",            ticker: "OZK",  price: 44.85,  day_pct: 0.6,  ytd_pct: -7.3,  high_52w: 53.66,  vs_high: -16.4, low_52w: 35.71,  vs_low: 25.6 },

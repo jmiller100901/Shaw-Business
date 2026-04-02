@@ -6,9 +6,15 @@
     'use strict';
 
     // ----------------------------------------------------------------
-    // Yahoo Finance symbol mapping (indices use caret prefix)
+    // FMP API key — get a free key at financialmodelingprep.com/developer
+    // Paste your key between the quotes below, then push to GitHub.
     // ----------------------------------------------------------------
-    var YAHOO_MAP = {
+    var FMP_API_KEY = '';
+
+    // ----------------------------------------------------------------
+    // Symbol mapping — FMP uses caret-prefix for indices
+    // ----------------------------------------------------------------
+    var FMP_MAP = {
         'SPX':  '^GSPC',
         'DJIA': '^DJI',
         'DJI':  '^DJI',
@@ -16,21 +22,20 @@
         'COMP': '^IXIC'
     };
 
-    // Reverse map: Yahoo symbol → our ticker
-    var YAHOO_REVERSE = {};
-    Object.keys(YAHOO_MAP).forEach(function (k) {
-        if (!YAHOO_REVERSE[YAHOO_MAP[k]]) YAHOO_REVERSE[YAHOO_MAP[k]] = k;
+    var FMP_REVERSE = {};
+    Object.keys(FMP_MAP).forEach(function (k) {
+        if (!FMP_REVERSE[FMP_MAP[k]]) FMP_REVERSE[FMP_MAP[k]] = k;
     });
 
+    // Yahoo Finance URL for clickable ticker/company links
     function yahooUrl(sym) {
-        return 'https://finance.yahoo.com/quote/' + encodeURIComponent(YAHOO_MAP[sym] || sym);
+        return 'https://finance.yahoo.com/quote/' + encodeURIComponent(FMP_MAP[sym] || sym);
     }
 
     // ----------------------------------------------------------------
     // Live data cache  { ticker: { price, dayPct, high52, low52, vsHigh, vsLow, ytdPct } }
     // ----------------------------------------------------------------
     var liveCache = {};
-    var CORS_PROXY = 'https://corsproxy.io/?';
 
     // ----------------------------------------------------------------
     // Init
@@ -53,10 +58,10 @@
         var bar = document.getElementById('ticker-bar');
         if (!bar || !FRIDAY_FINANCE.ticker_bar) return;
         bar.innerHTML = FRIDAY_FINANCE.ticker_bar.map(function (t) {
-            var live = liveCache[t.symbol];
-            var price    = live ? fmtTickerPrice(live.price) : t.price;
+            var live      = liveCache[t.symbol];
+            var price     = live ? fmtTickerPrice(live.price) : t.price;
             var changePct = (live !== undefined) ? live.dayPct : t.change_pct;
-            var up = changePct >= 0;
+            var up        = changePct >= 0;
             return '<a class="ticker-item" href="' + yahooUrl(t.symbol) + '" target="_blank" rel="noopener">' +
                 '<span class="sym">' + t.symbol + '</span>' +
                 '<span class="ticker-price">' + price + '</span>' +
@@ -72,7 +77,7 @@
     function renderMasthead() {
         var el = document.getElementById('masthead-date');
         if (el) el.textContent = FRIDAY_FINANCE.date;
-        var q = FRIDAY_FINANCE.quote;
+        var q   = FRIDAY_FINANCE.quote;
         var qEl = document.getElementById('masthead-quote');
         if (qEl && q) {
             qEl.innerHTML = '&ldquo;' + q.text + '&rdquo; &mdash; ' + q.author;
@@ -97,7 +102,7 @@
     }
 
     // ----------------------------------------------------------------
-    // FRED Chart (live static image + fallback)
+    // FRED Chart (live static image)
     // ----------------------------------------------------------------
     function renderFredChart() {
         var img = document.getElementById('fred-chart-img');
@@ -127,12 +132,12 @@
             }).join('');
         }
 
-        // Watch next week (innerHTML for bold tags)
+        // Watch next week
         var watchEl = document.getElementById('ff-watch-text');
         if (watchEl) watchEl.innerHTML = data.watch_next_week || '';
 
         // Weekend reading — supports reading_links (new) or wsj_articles (legacy)
-        var articles = data.reading_links || data.wsj_articles || [];
+        var articles  = data.reading_links || data.wsj_articles || [];
         var readingEl = document.getElementById('ff-weekend-reading');
         if (readingEl) {
             readingEl.innerHTML = articles.map(function (a, i) {
@@ -158,7 +163,7 @@
             rateBody.innerHTML = rateHtml;
         }
 
-        // Stock dateline — initial state with manual trigger
+        // Stock dateline — initial state
         setStockStatus(
             'Static data &bull; ' +
             '<a href="#" id="refresh-live-btn" class="refresh-link">&#8635; Fetch live prices</a>'
@@ -173,7 +178,7 @@
     // Stock Table
     // ----------------------------------------------------------------
     function renderStockTable() {
-        var data = FRIDAY_FINANCE;
+        var data      = FRIDAY_FINANCE;
         var stockBody = document.getElementById('ff-stock-body');
         if (!stockBody || !data.stocks) return;
 
@@ -215,55 +220,63 @@
         var btn = document.getElementById('refresh-live-btn');
         if (btn) btn.addEventListener('click', function (e) {
             e.preventDefault();
-            liveCache = {};           // clear cache so we re-fetch everything
+            liveCache = {};
             initLiveStockData();
         });
     }
 
     // ----------------------------------------------------------------
-    // Live Data — Phase 1: batch quotes (price, day%, 52w)
-    //             Phase 2: sequential YTD via chart API
+    // Live Data — Financial Modeling Prep API
+    // Two calls: /quote (price, day%, 52W) + /stock-price-change (YTD)
     // ----------------------------------------------------------------
     function initLiveStockData() {
+        if (!FMP_API_KEY) {
+            setStockStatus(
+                '<span class="error-badge">FMP API key not configured</span>' +
+                '&nbsp;&bull;&nbsp;Showing static data'
+            );
+            return;
+        }
+
         var symbols = collectAllSymbols();
+        var fmpSyms = symbols.map(function (s) { return FMP_MAP[s] || s; });
+        var symList = fmpSyms.map(encodeURIComponent).join(',');
+        var base    = 'https://financialmodelingprep.com/api/v3/';
+
         setStockStatus('<span class="loading-badge">&#8635; Fetching live prices&hellip;</span>');
 
-        var batches = chunkArray(symbols, 20);
+        Promise.all([
+            fetch(base + 'quote/' + symList + '?apikey=' + FMP_API_KEY).then(function (r) { return r.json(); }),
+            fetch(base + 'stock-price-change/' + symList + '?apikey=' + FMP_API_KEY).then(function (r) { return r.json(); })
+        ])
+        .then(function (results) {
+            var quotes  = Array.isArray(results[0]) ? results[0] : [];
+            var changes = Array.isArray(results[1]) ? results[1] : [];
 
-        Promise.all(batches.map(function (batch) {
-            var yahooSyms = batch.map(function (s) { return YAHOO_MAP[s] || s; });
-            return fetchQuoteBatch(yahooSyms);
-        }))
-        .then(function (batchResults) {
-            // Populate cache from Phase 1
-            batchResults.forEach(function (results) {
-                if (!Array.isArray(results)) return;
-                results.forEach(function (q) {
-                    var ticker = YAHOO_REVERSE[q.symbol] || q.symbol;
-                    liveCache[ticker] = {
-                        price:  q.regularMarketPrice,
-                        dayPct: q.regularMarketChangePercent,
-                        high52: q.fiftyTwoWeekHigh,
-                        low52:  q.fiftyTwoWeekLow,
-                        vsHigh: (q.fiftyTwoWeekHighChangePercent || 0) * 100,
-                        vsLow:  (q.fiftyTwoWeekLowChangePercent  || 0) * 100,
-                        ytdPct: null   // filled in Phase 2
-                    };
-                });
+            // Build YTD lookup
+            var ytdMap = {};
+            changes.forEach(function (c) {
+                var tk = FMP_REVERSE[c.symbol] || c.symbol;
+                ytdMap[tk] = (c.ytd != null) ? c.ytd : null;
             });
 
-            // Refresh UI with live price / 52w data immediately
-            renderStockTable();
-            renderTickerBar();
-            setStockStatus(
-                '<span class="live-badge">&#10003; Price &amp; 52W Live</span>' +
-                '&nbsp;&nbsp;<span class="loading-badge">&#8635; Loading YTD&hellip;</span>'
-            );
+            // Populate live cache
+            quotes.forEach(function (q) {
+                var tk    = FMP_REVERSE[q.symbol] || q.symbol;
+                var price = q.price;
+                var hi    = q.yearHigh;
+                var lo    = q.yearLow;
+                liveCache[tk] = {
+                    price:  price,
+                    dayPct: q.changesPercentage,
+                    high52: hi,
+                    low52:  lo,
+                    vsHigh: (hi && price) ? ((price - hi) / hi * 100) : null,
+                    vsLow:  (lo && price) ? ((price - lo) / lo * 100) : null,
+                    ytdPct: (ytdMap[tk] != null) ? ytdMap[tk] : null
+                };
+            });
 
-            // Phase 2: YTD — sequential fetches at 120ms spacing
-            return fetchYTDSequential(symbols);
-        })
-        .then(function () {
             renderStockTable();
             renderTickerBar();
             var t = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -274,7 +287,7 @@
             bindRefreshBtn();
         })
         .catch(function (err) {
-            console.warn('[Shaw Report] Live data error:', err);
+            console.warn('[Shaw Report] FMP error:', err);
             setStockStatus(
                 '<span class="error-badge">Live data unavailable</span>' +
                 '&nbsp;&bull;&nbsp;Showing static data&nbsp;&nbsp;' +
@@ -282,85 +295,6 @@
             );
             bindRefreshBtn();
         });
-    }
-
-    // Batch quote fetch from Yahoo Finance v7
-    function fetchQuoteBatch(yahooSymbols) {
-        var fields = [
-            'symbol',
-            'regularMarketPrice',
-            'regularMarketChangePercent',
-            'fiftyTwoWeekHigh',
-            'fiftyTwoWeekHighChangePercent',
-            'fiftyTwoWeekLow',
-            'fiftyTwoWeekLowChangePercent'
-        ].join('%2C');
-
-        var url = 'https://query1.finance.yahoo.com/v7/finance/quote?symbols=' +
-            yahooSymbols.map(encodeURIComponent).join('%2C') +
-            '&fields=' + fields;
-
-        return fetchWithFallback(url).then(function (data) {
-            return (data.quoteResponse && data.quoteResponse.result) || [];
-        });
-    }
-
-    // Sequential YTD fetch — one ticker every 120ms to avoid rate limits
-    function fetchYTDSequential(symbols) {
-        return symbols.reduce(function (chain, sym, i) {
-            return chain.then(function () {
-                return new Promise(function (resolve) {
-                    setTimeout(function () {
-                        fetchYTDForSymbol(sym)
-                            .then(function (ytd) {
-                                if (ytd !== null && liveCache[sym]) {
-                                    liveCache[sym].ytdPct = ytd;
-                                }
-                            })
-                            .catch(function () {})
-                            .then(resolve);
-                    }, i * 120);
-                });
-            });
-        }, Promise.resolve());
-    }
-
-    // YTD for a single symbol via Yahoo Finance v8 chart API
-    // Uses meta.chartPreviousClose (= Dec 31 prior-year close) as the YTD baseline
-    function fetchYTDForSymbol(sym) {
-        var yahooSym = YAHOO_MAP[sym] || sym;
-        var url = 'https://query1.finance.yahoo.com/v8/finance/chart/' +
-            encodeURIComponent(yahooSym) + '?range=ytd&interval=1d';
-
-        return fetchWithFallback(url).then(function (data) {
-            var result = data.chart && data.chart.result && data.chart.result[0];
-            if (!result) return null;
-
-            // Prefer chartPreviousClose (Dec 31 baseline); fall back to first data point
-            var startPrice = result.meta.chartPreviousClose;
-            if (!startPrice) {
-                var closes = result.indicators.quote[0].close;
-                for (var i = 0; i < closes.length; i++) {
-                    if (closes[i] !== null) { startPrice = closes[i]; break; }
-                }
-            }
-            var currentPrice = result.meta.regularMarketPrice;
-            if (!startPrice || !currentPrice) return null;
-            return ((currentPrice / startPrice) - 1) * 100;
-        }).catch(function () { return null; });
-    }
-
-    // Fetch with direct attempt first, CORS proxy fallback second
-    function fetchWithFallback(url) {
-        return fetch(url)
-            .then(function (r) {
-                if (!r.ok) throw new Error('HTTP ' + r.status);
-                return r.json();
-            })
-            .catch(function () {
-                return fetch(CORS_PROXY + encodeURIComponent(url))
-                    .then(function (r) { return r.json(); });
-            });
     }
 
     // ----------------------------------------------------------------
@@ -375,12 +309,6 @@
             });
         }
         return symbols;
-    }
-
-    function chunkArray(arr, size) {
-        var out = [];
-        for (var i = 0; i < arr.length; i += size) out.push(arr.slice(i, i + size));
-        return out;
     }
 
     function fmtPrice(val) {
@@ -440,8 +368,8 @@
     }
 
     function renderTLContent() {
-        var data    = TENANT_LENDER_NEWS;
-        var alerts  = data.alerts || [];
+        var data     = TENANT_LENDER_NEWS;
+        var alerts   = data.alerts || [];
         var filtered = tlFilter === 'All' ? alerts : alerts.filter(function (a) { return a.cat === tlFilter; });
 
         var byLevel = {};

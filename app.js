@@ -9,7 +9,7 @@
     // FMP API key — get a free key at financialmodelingprep.com/developer
     // Paste your key between the quotes below, then push to GitHub.
     // ----------------------------------------------------------------
-    var FMP_API_KEY = '';
+    var FMP_API_KEY = 'BzMKmnKNNUOaXHSPMARn18MLJ6u6NoNG';
 
     // ----------------------------------------------------------------
     // Symbol mapping — FMP uses caret-prefix for indices

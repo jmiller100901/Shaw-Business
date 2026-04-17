@@ -6,9 +6,9 @@
     'use strict';
 
     // ----------------------------------------------------------------
-    // Symbol mapping — Yahoo uses caret-prefix for indices
+    // Symbol mapping — indices need caret-prefix for Yahoo URLs and Finnhub
     // ----------------------------------------------------------------
-    var YAHOO_MAP = {
+    var INDEX_MAP = {
         'SPX':  '^GSPC',
         'DJIA': '^DJI',
         'DJI':  '^DJI',
@@ -16,18 +16,13 @@
         'COMP': '^IXIC'
     };
 
-    var YAHOO_REVERSE = {};
-    Object.keys(YAHOO_MAP).forEach(function (k) {
-        if (!YAHOO_REVERSE[YAHOO_MAP[k]]) YAHOO_REVERSE[YAHOO_MAP[k]] = k;
-    });
-
     // Yahoo Finance URL for clickable ticker/company links
     function yahooUrl(sym) {
-        return 'https://finance.yahoo.com/quote/' + encodeURIComponent(YAHOO_MAP[sym] || sym);
+        return 'https://finance.yahoo.com/quote/' + encodeURIComponent(INDEX_MAP[sym] || sym);
     }
 
     // ----------------------------------------------------------------
-    // Live data cache  { ticker: { price, dayPct, high52, low52, vsHigh, vsLow, ytdPct } }
+    // Live data cache  { ticker: { price, dayPct } }
     // ----------------------------------------------------------------
     var liveCache = {};
 
@@ -162,16 +157,21 @@
                 var yurl = yahooUrl(s.ticker);
 
                 if (hasLive && L) {
-                    // Live data available for this symbol
+                    // All live from Finnhub; fall back to static only if API returned null
+                    var ytd   = L.ytdPct  != null ? L.ytdPct  : s.ytd_pct;
+                    var hi    = L.high52  != null ? L.high52  : s.high_52w;
+                    var lo    = L.low52   != null ? L.low52   : s.low_52w;
+                    var vsHi  = L.vsHigh  != null ? L.vsHigh  : s.vs_high;
+                    var vsLo  = L.vsLow   != null ? L.vsLow   : s.vs_low;
                     html += '<tr data-ticker="' + s.ticker + '">' +
                         '<td class="company"><a href="' + yurl + '" target="_blank" rel="noopener">' + s.company + '</a></td>' +
                         '<td class="ticker"><a href="' + yurl + '" target="_blank" rel="noopener">' + s.ticker + '</a></td>' +
                         '<td class="num">' + fmtPrice(L.price) + '</td>' +
-                        pctCell(L.dayPct) + pctCell(L.ytdPct) +
-                        '<td class="num">' + fmtPrice(L.high52) + '</td>' +
-                        pctCell(L.vsHigh) +
-                        '<td class="num">' + fmtPrice(L.low52) + '</td>' +
-                        pctCell(L.vsLow) +
+                        pctCell(L.dayPct) + pctCell(ytd) +
+                        '<td class="num">' + fmtPrice(hi) + '</td>' +
+                        pctCell(vsHi) +
+                        '<td class="num">' + fmtPrice(lo) + '</td>' +
+                        pctCell(vsLo) +
                         '</tr>';
                 } else if (hasLive && !L) {
                     // Live fetch ran but this symbol failed
@@ -208,44 +208,39 @@
     }
 
     // ----------------------------------------------------------------
-    // Live Data — Yahoo Finance chart API (via CORS proxy)
-    // Single call per symbol: range=ytd gives price, day%, YTD%, 52W
+    // Live Data — Finnhub REST API (direct CORS, no proxy)
+    // /quote → price, day%; /stock/metric → 52W high/low, YTD%
     // ----------------------------------------------------------------
-    var CORS_PROXY = 'https://corsproxy.io/?url=';
-    var YAHOO_BASE = 'https://query2.finance.yahoo.com/v8/finance/chart/';
+    var FINNHUB_TOKEN = 'd7h5mkhr01qhiu0abuegd7h5mkhr01qhiu0abuf0';
+    var FINNHUB_ROOT  = 'https://finnhub.io/api/v1/';
 
-    function fetchYahooQuote(symbol) {
-        var yahooSym = YAHOO_MAP[symbol] || symbol;
-        var url = YAHOO_BASE + encodeURIComponent(yahooSym) + '?range=ytd&interval=1d&includePrePost=false';
-        return fetch(CORS_PROXY + encodeURIComponent(url))
-            .then(function (r) { return r.json(); })
-            .then(function (d) {
-                var result = d.chart && d.chart.result && d.chart.result[0];
-                if (!result) throw new Error('No data for ' + symbol);
-                var m      = result.meta;
-                var closes = result.indicators.quote[0].close;
-                var price  = m.regularMarketPrice;
-                var hi     = m.fiftyTwoWeekHigh;
-                var lo     = m.fiftyTwoWeekLow;
+    function fetchFinnhubQuote(symbol) {
+        var finnhubSym = INDEX_MAP[symbol] || symbol;
+        var tok        = '&token=' + FINNHUB_TOKEN;
 
-                // Day %: use Yahoo's pre-calculated field; fall back to regularMarketPreviousClose
-                var dayPct = (m.regularMarketChangePercent != null)
-                    ? m.regularMarketChangePercent
-                    : (m.regularMarketPreviousClose ? ((price - m.regularMarketPreviousClose) / m.regularMarketPreviousClose * 100) : 0);
+        var quoteUrl  = FINNHUB_ROOT + 'quote?symbol='        + encodeURIComponent(finnhubSym) + tok;
+        var metricUrl = FINNHUB_ROOT + 'stock/metric?symbol=' + encodeURIComponent(finnhubSym) + '&metric=all' + tok;
 
-                // YTD %: current price vs last close of prior year (chartPreviousClose with range=ytd)
-                var ytdPct = m.chartPreviousClose ? ((price - m.chartPreviousClose) / m.chartPreviousClose * 100) : null;
+        var quoteFetch  = fetch(quoteUrl).then(function (r) { return r.json(); });
+        var metricFetch = fetch(metricUrl).then(function (r) { return r.json(); }).catch(function () { return null; });
 
-                return {
-                    ticker: symbol,
-                    price:  price,
-                    dayPct: dayPct,
-                    ytdPct: ytdPct,
-                    high52: hi,
-                    low52:  lo,
-                    vsHigh: (hi && price) ? ((price - hi) / hi * 100) : null,
-                    vsLow:  (lo && price) ? ((price - lo) / lo * 100) : null
-                };
+        return Promise.all([quoteFetch, metricFetch])
+            .then(function (res) {
+                var q = res[0];
+                var m = res[1] && res[1].metric ? res[1].metric : null;
+
+                if (!q || q.c == null || q.c === 0) throw new Error('No data for ' + symbol);
+
+                var price  = q.c;
+                var dayPct = q.dp != null ? q.dp : (q.pc ? ((price - q.pc) / q.pc * 100) : 0);
+                var ytdPct = m && m.ytdPriceReturnDaily != null ? m.ytdPriceReturnDaily : null;
+                var high52 = m && m['52WeekHigh'] != null       ? m['52WeekHigh']        : null;
+                var low52  = m && m['52WeekLow']  != null       ? m['52WeekLow']         : null;
+                var vsHigh = (high52 && price) ? ((price - high52) / high52 * 100) : null;
+                var vsLow  = (low52  && price) ? ((price - low52)  / low52  * 100) : null;
+
+                return { ticker: symbol, price: price, dayPct: dayPct, ytdPct: ytdPct,
+                         high52: high52, low52: low52, vsHigh: vsHigh, vsLow: vsLow };
             });
     }
 
@@ -255,7 +250,7 @@
         setStockStatus('<span class="loading-badge">&#8635; Fetching live prices&hellip;</span>');
 
         var promises = symbols.map(function (sym) {
-            return fetchYahooQuote(sym)
+            return fetchFinnhubQuote(sym)
                 .then(function (data) { return { status: 'fulfilled', value: data }; })
                 .catch(function (err) { return { status: 'rejected', ticker: sym, reason: err }; });
         });
@@ -282,7 +277,7 @@
                 bindRefreshBtn();
             })
             .catch(function (err) {
-                console.warn('[Shaw Report] Yahoo Finance error:', err);
+                console.warn('[Shaw Report] Finnhub error:', err);
                 setStockStatus(
                     '<span class="error-badge">Live data unavailable</span>' +
                     '&nbsp;&bull;&nbsp;Showing static data&nbsp;&nbsp;' +
@@ -298,11 +293,19 @@
     // ----------------------------------------------------------------
     function collectAllSymbols() {
         var symbols = [], seen = {};
-        if (!FRIDAY_FINANCE.stocks) return symbols;
-        for (var cat in FRIDAY_FINANCE.stocks) {
-            FRIDAY_FINANCE.stocks[cat].forEach(function (s) {
-                if (!seen[s.ticker]) { seen[s.ticker] = true; symbols.push(s.ticker); }
+        // Include ticker bar symbols
+        if (FRIDAY_FINANCE.ticker_bar) {
+            FRIDAY_FINANCE.ticker_bar.forEach(function (t) {
+                if (!seen[t.symbol]) { seen[t.symbol] = true; symbols.push(t.symbol); }
             });
+        }
+        // Include stock table symbols
+        if (FRIDAY_FINANCE.stocks) {
+            for (var cat in FRIDAY_FINANCE.stocks) {
+                FRIDAY_FINANCE.stocks[cat].forEach(function (s) {
+                    if (!seen[s.ticker]) { seen[s.ticker] = true; symbols.push(s.ticker); }
+                });
+            }
         }
         return symbols;
     }

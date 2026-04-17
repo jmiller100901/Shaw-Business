@@ -173,8 +173,20 @@
                         '<td class="num">' + fmtPrice(lo) + '</td>' +
                         pctCell(vsLo) +
                         '</tr>';
+                } else if (hasLive && !L && isIndex(s.ticker)) {
+                    // Index symbol — Finnhub free tier doesn't support these, use static data
+                    html += '<tr data-ticker="' + s.ticker + '">' +
+                        '<td class="company"><a href="' + yurl + '" target="_blank" rel="noopener">' + s.company + '</a></td>' +
+                        '<td class="ticker"><a href="' + yurl + '" target="_blank" rel="noopener">' + s.ticker + '</a></td>' +
+                        '<td class="num">' + fmtPrice(s.price) + '</td>' +
+                        pctCell(s.day_pct) + pctCell(s.ytd_pct) +
+                        '<td class="num">' + fmtPrice(s.high_52w) + '</td>' +
+                        pctCell(s.vs_high) +
+                        '<td class="num">' + fmtPrice(s.low_52w) + '</td>' +
+                        pctCell(s.vs_low) +
+                        '</tr>';
                 } else if (hasLive && !L) {
-                    // Live fetch ran but this symbol failed
+                    // Live fetch ran but this stock failed
                     html += '<tr data-ticker="' + s.ticker + '" class="stale-row">' +
                         '<td class="company"><a href="' + yurl + '" target="_blank" rel="noopener">' + s.company + '</a></td>' +
                         '<td class="ticker"><a href="' + yurl + '" target="_blank" rel="noopener">' + s.ticker + '</a></td>' +
@@ -233,7 +245,7 @@
 
                 var price  = q.c;
                 var dayPct = q.dp != null ? q.dp : (q.pc ? ((price - q.pc) / q.pc * 100) : 0);
-                var ytdPct = m && m.ytdPriceReturnDaily != null ? m.ytdPriceReturnDaily : null;
+                var ytdPct = m && m.yearToDatePriceReturnDaily != null ? m.yearToDatePriceReturnDaily : null;
                 var high52 = m && m['52WeekHigh'] != null       ? m['52WeekHigh']        : null;
                 var low52  = m && m['52WeekLow']  != null       ? m['52WeekLow']         : null;
                 var vsHigh = (high52 && price) ? ((price - high52) / high52 * 100) : null;
@@ -291,19 +303,23 @@
     // ----------------------------------------------------------------
     // Helpers
     // ----------------------------------------------------------------
+    function isIndex(sym) {
+        return !!INDEX_MAP[sym];
+    }
+
     function collectAllSymbols() {
         var symbols = [], seen = {};
-        // Include ticker bar symbols
+        // Include ticker bar symbols (skip indices — Finnhub free tier blocks them)
         if (FRIDAY_FINANCE.ticker_bar) {
             FRIDAY_FINANCE.ticker_bar.forEach(function (t) {
-                if (!seen[t.symbol]) { seen[t.symbol] = true; symbols.push(t.symbol); }
+                if (!seen[t.symbol] && !isIndex(t.symbol)) { seen[t.symbol] = true; symbols.push(t.symbol); }
             });
         }
-        // Include stock table symbols
+        // Include stock table symbols (skip indices)
         if (FRIDAY_FINANCE.stocks) {
             for (var cat in FRIDAY_FINANCE.stocks) {
                 FRIDAY_FINANCE.stocks[cat].forEach(function (s) {
-                    if (!seen[s.ticker]) { seen[s.ticker] = true; symbols.push(s.ticker); }
+                    if (!seen[s.ticker] && !isIndex(s.ticker)) { seen[s.ticker] = true; symbols.push(s.ticker); }
                 });
             }
         }

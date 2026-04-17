@@ -228,9 +228,10 @@
                 var hi     = m.fiftyTwoWeekHigh;
                 var lo     = m.fiftyTwoWeekLow;
 
-                // Day %: current price vs previous trading day close
-                var prevDayClose = (closes.length >= 2) ? closes[closes.length - 2] : m.chartPreviousClose;
-                var dayPct = prevDayClose ? ((price - prevDayClose) / prevDayClose * 100) : 0;
+                // Day %: use Yahoo's pre-calculated field; fall back to regularMarketPreviousClose
+                var dayPct = (m.regularMarketChangePercent != null)
+                    ? m.regularMarketChangePercent
+                    : (m.regularMarketPreviousClose ? ((price - m.regularMarketPreviousClose) / m.regularMarketPreviousClose * 100) : 0);
 
                 // YTD %: current price vs last close of prior year (chartPreviousClose with range=ytd)
                 var ytdPct = m.chartPreviousClose ? ((price - m.chartPreviousClose) / m.chartPreviousClose * 100) : null;

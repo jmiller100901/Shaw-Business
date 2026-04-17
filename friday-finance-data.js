@@ -11,7 +11,7 @@ const FRIDAY_FINANCE = {
     },
 
     ticker_bar: [
-        { symbol: "SPX",  price: "7,047", change_pct: 0.45 },
+        { symbol: "SPX",  price: "7,114", change_pct: 1.05 },
         { symbol: "DJIA", price: "48,199", change_pct: 0.60 },
         { symbol: "IXIC", price: "24,016", change_pct: 0.85 },
         { symbol: "NVDA", price: "190.16", change_pct: 0.85 },
@@ -80,7 +80,7 @@ const FRIDAY_FINANCE = {
 
     stocks: {
         "Indices": [
-            { company: "S&P 500",              ticker: "SPX",  price: 7047.12,  day_pct: 0.45,  ytd_pct: 2.2,   high_52w: 7051.28,  vs_high: -0.1,  low_52w: 5101.63,  vs_low: 38.1 },
+            { company: "S&P 500",              ticker: "SPX",  price: 7114.22,  day_pct: 1.05,  ytd_pct: 3.2,   high_52w: 7114.22,  vs_high: 0.0,   low_52w: 5101.63,  vs_low: 39.5 },
             { company: "Dow Jones Industrial",  ticker: "DJI",  price: 48199.30, day_pct: 0.60,  ytd_pct: 0.3,   high_52w: 50512.79, vs_high: -4.6,  low_52w: 37830.66, vs_low: 27.4 },
             { company: "Nasdaq Composite",      ticker: "COMP", price: 24016.32, day_pct: 0.85,  ytd_pct: -1.2,  high_52w: 24019.99, vs_high: -0.0,  low_52w: 15685.33, vs_low: 53.1 }
         ],

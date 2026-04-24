@@ -25,6 +25,8 @@
     // Live data cache  { ticker: { price, dayPct } }
     // ----------------------------------------------------------------
     var liveCache = {};
+    var metricCache = {};
+    var liveFetchDone = false;
 
     // ----------------------------------------------------------------
     // Init
@@ -148,7 +150,8 @@
         var stockBody = document.getElementById('ff-stock-body');
         if (!stockBody || !data.stocks) return;
 
-        var hasLive = Object.keys(liveCache).length > 0;
+        var hasLive  = Object.keys(liveCache).length > 0;
+        var fetchDone = hasLive || liveFetchDone;
         var html = '';
         for (var cat in data.stocks) {
             html += '<tr class="cat-row"><td colspan="9">' + cat + '</td></tr>';
@@ -157,24 +160,25 @@
                 var yurl = yahooUrl(s.ticker);
 
                 if (hasLive && L) {
-                    // All live from Finnhub; fall back to static only if API returned null
-                    var ytd   = L.ytdPct  != null ? L.ytdPct  : s.ytd_pct;
-                    var hi    = L.high52  != null ? L.high52  : s.high_52w;
-                    var lo    = L.low52   != null ? L.low52   : s.low_52w;
-                    var vsHi  = L.vsHigh  != null ? L.vsHigh  : s.vs_high;
-                    var vsLo  = L.vsLow   != null ? L.vsLow   : s.vs_low;
+                    // Live price + day% from Finnhub/quote; 52W/YTD from Finnhub/metric when available, else static
+                    var M   = metricCache[s.ticker];
+                    var ytd = (M && M.ytdPct  != null) ? M.ytdPct  : s.ytd_pct;
+                    var h52 = (M && M.high52w != null) ? M.high52w : s.high_52w;
+                    var l52 = (M && M.low52w  != null) ? M.low52w  : s.low_52w;
+                    var vsH = (h52 && L.price) ? ((L.price - h52) / h52 * 100) : s.vs_high;
+                    var vsL = (l52 && L.price) ? ((L.price - l52) / l52 * 100) : s.vs_low;
                     html += '<tr data-ticker="' + s.ticker + '">' +
                         '<td class="company"><a href="' + yurl + '" target="_blank" rel="noopener">' + s.company + '</a></td>' +
                         '<td class="ticker"><a href="' + yurl + '" target="_blank" rel="noopener">' + s.ticker + '</a></td>' +
                         '<td class="num">' + fmtPrice(L.price) + '</td>' +
                         pctCell(L.dayPct) + pctCell(ytd) +
-                        '<td class="num">' + fmtPrice(hi) + '</td>' +
-                        pctCell(vsHi) +
-                        '<td class="num">' + fmtPrice(lo) + '</td>' +
-                        pctCell(vsLo) +
+                        '<td class="num">' + fmtPrice(h52) + '</td>' +
+                        pctCell(vsH) +
+                        '<td class="num">' + fmtPrice(l52) + '</td>' +
+                        pctCell(vsL) +
                         '</tr>';
-                } else if (hasLive && !L && isIndex(s.ticker)) {
-                    // Index symbol — Finnhub free tier doesn't support these, use static data
+                } else if (fetchDone && !L) {
+                    // Fetch complete but no live data (index, rate-limited, or API error) — use static
                     html += '<tr data-ticker="' + s.ticker + '">' +
                         '<td class="company"><a href="' + yurl + '" target="_blank" rel="noopener">' + s.company + '</a></td>' +
                         '<td class="ticker"><a href="' + yurl + '" target="_blank" rel="noopener">' + s.ticker + '</a></td>' +
@@ -184,13 +188,6 @@
                         pctCell(s.vs_high) +
                         '<td class="num">' + fmtPrice(s.low_52w) + '</td>' +
                         pctCell(s.vs_low) +
-                        '</tr>';
-                } else if (hasLive && !L) {
-                    // Live fetch ran but this stock failed
-                    html += '<tr data-ticker="' + s.ticker + '" class="stale-row">' +
-                        '<td class="company"><a href="' + yurl + '" target="_blank" rel="noopener">' + s.company + '</a></td>' +
-                        '<td class="ticker"><a href="' + yurl + '" target="_blank" rel="noopener">' + s.ticker + '</a></td>' +
-                        '<td class="num" colspan="7" style="text-align:center;color:var(--text-ter);font-style:italic;">Data unavailable</td>' +
                         '</tr>';
                 } else {
                     // Still loading
@@ -215,6 +212,8 @@
         if (btn) btn.addEventListener('click', function (e) {
             e.preventDefault();
             liveCache = {};
+            metricCache = {};
+            liveFetchDone = false;
             initLiveStockData();
         });
     }
@@ -229,31 +228,53 @@
     function fetchFinnhubQuote(symbol) {
         var finnhubSym = INDEX_MAP[symbol] || symbol;
         var tok        = '&token=' + FINNHUB_TOKEN;
+        var quoteUrl   = FINNHUB_ROOT + 'quote?symbol=' + encodeURIComponent(finnhubSym) + tok;
 
-        var quoteUrl  = FINNHUB_ROOT + 'quote?symbol='        + encodeURIComponent(finnhubSym) + tok;
-        var metricUrl = FINNHUB_ROOT + 'stock/metric?symbol=' + encodeURIComponent(finnhubSym) + '&metric=all' + tok;
-
-        var quoteFetch  = fetch(quoteUrl).then(function (r) { return r.json(); });
-        var metricFetch = fetch(metricUrl).then(function (r) { return r.json(); }).catch(function () { return null; });
-
-        return Promise.all([quoteFetch, metricFetch])
-            .then(function (res) {
-                var q = res[0];
-                var m = res[1] && res[1].metric ? res[1].metric : null;
-
+        return fetch(quoteUrl)
+            .then(function (r) { return r.json(); })
+            .then(function (q) {
                 if (!q || q.c == null || q.c === 0) throw new Error('No data for ' + symbol);
-
                 var price  = q.c;
                 var dayPct = q.dp != null ? q.dp : (q.pc ? ((price - q.pc) / q.pc * 100) : 0);
-                var ytdPct = m && m.yearToDatePriceReturnDaily != null ? m.yearToDatePriceReturnDaily : null;
-                var high52 = m && m['52WeekHigh'] != null       ? m['52WeekHigh']        : null;
-                var low52  = m && m['52WeekLow']  != null       ? m['52WeekLow']         : null;
-                var vsHigh = (high52 && price) ? ((price - high52) / high52 * 100) : null;
-                var vsLow  = (low52  && price) ? ((price - low52)  / low52  * 100) : null;
-
-                return { ticker: symbol, price: price, dayPct: dayPct, ytdPct: ytdPct,
-                         high52: high52, low52: low52, vsHigh: vsHigh, vsLow: vsLow };
+                return { ticker: symbol, price: price, dayPct: dayPct };
             });
+    }
+
+    function fetchFinnhubMetric(symbol) {
+        var tok = '&token=' + FINNHUB_TOKEN;
+        var url = FINNHUB_ROOT + 'stock/metric?symbol=' + encodeURIComponent(symbol) + '&metric=all' + tok;
+        return fetch(url)
+            .then(function (r) { return r.json(); })
+            .then(function (d) {
+                if (!d || !d.metric) throw new Error('No metric for ' + symbol);
+                var m   = d.metric;
+                var ytd = m['yearToDatePriceReturnDaily'] != null ? m['yearToDatePriceReturnDaily']
+                        : m['ytdPriceReturnDaily'];
+                return { ticker: symbol, high52w: m['52WeekHigh'], low52w: m['52WeekLow'], ytdPct: ytd };
+            });
+    }
+
+    // Fetch 52W high/low + YTD in batches of 15 after quotes complete (rate-limit safe)
+    function initLiveMetricData(symbols) {
+        var BATCH = 15;
+        function runBatch(start) {
+            if (start >= symbols.length) return;
+            var batch    = symbols.slice(start, start + BATCH);
+            var promises = batch.map(function (sym) {
+                return fetchFinnhubMetric(sym)
+                    .then(function (d) { return { ok: true, value: d }; })
+                    .catch(function ()  { return { ok: false }; });
+            });
+            Promise.all(promises).then(function (results) {
+                var got = 0;
+                results.forEach(function (r) {
+                    if (r.ok) { metricCache[r.value.ticker] = r.value; got++; }
+                });
+                if (got > 0) renderStockTable();
+                setTimeout(function () { runBatch(start + BATCH); }, 1000);
+            });
+        }
+        runBatch(0);
     }
 
     function initLiveStockData() {
@@ -269,6 +290,7 @@
 
         Promise.all(promises)
             .then(function (results) {
+                liveFetchDone = true;
                 var success = 0;
                 results.forEach(function (r) {
                     if (r.status === 'fulfilled') {
@@ -287,9 +309,13 @@
                     '&nbsp;&nbsp;<a href="#" id="refresh-live-btn" class="refresh-link">&#8635; Refresh</a>'
                 );
                 bindRefreshBtn();
+                initLiveMetricData(symbols);
             })
             .catch(function (err) {
                 console.warn('[Shaw Report] Finnhub error:', err);
+                liveFetchDone = true;
+                renderStockTable();
+                renderTickerBar();
                 setStockStatus(
                     '<span class="error-badge">Live data unavailable</span>' +
                     '&nbsp;&bull;&nbsp;Showing static data&nbsp;&nbsp;' +

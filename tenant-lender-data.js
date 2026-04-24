@@ -1,9 +1,9 @@
-// Tenant & Lender News — Week of April 17, 2026
+// Tenant & Lender News — Week of April 24, 2026
 // Replace this file each week with updated scan results (same structure)
 
 const TENANT_LENDER_NEWS = {
-    date: "April 17, 2026",
-    last_scan: "2026-04-17T18:00:00Z",
+    date: "April 24, 2026",
+    last_scan: "2026-04-24T18:00:00Z",
 
     // Jackson Shaw watchlist — tenants, lenders, equity partners
     companies: [
@@ -43,11 +43,11 @@ const TENANT_LENDER_NEWS = {
             level: "HIGH",
             company: "International Paper",
             cat: "Tenant",
-            headline: "IP acquires NORPAC for $360M; Q1 earnings April 30; restructuring continues with 7+ closures and 500+ layoffs",
-            summary: "On <b>April 16</b>, International Paper announced the acquisition of <b>North Pacific Paper Company (NORPAC)</b> for <b>$360M</b>. NORPAC operates in Longview, WA with ~500 employees and ~1M tons/year containerboard capacity; IP says it adds system flexibility and lightweight recycled containerboard. In the background: IP recorded a <b>$2.47B non-cash goodwill impairment</b> on EMEA operations for FY2025 and a net loss of $2.84B. A plan to <b>spin off its EMEA packaging business</b> into a separately listed entity (targeting 12–15 months) remains on track. IP is also advancing plans to <b>permanently close 7+ facilities</b> affecting ~<b>500 roles</b> by end of 2026. JPMorgan placed IP on <b>Negative Catalyst Watch</b> (April 5), cutting the price target to <b>$46.00</b>. Stock is down <b>~32% YTD</b>. Q1 earnings due <b>April 30</b>.",
-            relevance: "NORPAC acquisition adds capacity but doesn't resolve counterparty uncertainty from the EMEA spin-off — it is still unclear which successor entity will hold existing North American lease obligations post-split. Facility closures create direct lease risk if any IP-occupied Jackson Shaw properties are targeted. Confirm which specific plants are slated for closure and which post-split entity becomes the counterparty.",
-            source: "IP Investor Relations / GuruFocus / Packaging Dive / JPMorgan Research",
-            date: "2026-04-16"
+            headline: "Q1 earnings April 30; NORPAC acquisition $360M; EMEA spin-off in progress; 7+ closures and 500+ layoffs; stock -32% YTD",
+            summary: "IP Q1 2026 earnings are due <b>April 30 after market close</b> — analyst consensus EPS ~$0.23 (flat YoY), revenue guidance $24.1–24.9B. Key watch items: any update on the <b>EMEA spin-off timeline</b> and which successor entity will hold North American lease obligations post-split; status of the <b>7+ facility closures</b> targeting ~500 roles by end of 2026; and the <b>NORPAC acquisition</b> ($360M, ~500 employees, ~1M tons/year containerboard) that closed April 16. Background: IP recorded a <b>$2.47B non-cash goodwill impairment</b> on EMEA operations for FY2025 and a net loss of $2.84B. JPMorgan placed IP on <b>Negative Catalyst Watch</b> (April 5), cutting the price target to <b>$46.00</b>. Stock is down <b>~32% YTD</b>.",
+            relevance: "The April 30 earnings call is the most critical event for Jackson Shaw's lease counterparty risk assessment this quarter. It is still unclear which post-split entity (IP North America vs. the EMEA spinco) will hold existing North American lease obligations. Facility closures create direct lease risk if any IP-occupied Jackson Shaw properties are among the 7+ targeted for permanent closure. Confirm which specific plants are slated for closure.",
+            source: "IP Investor Relations / GuruFocus / Packaging Dive / JPMorgan Research / StockTitan",
+            date: "2026-04-24"
         },
         {
             level: "MEDIUM",
@@ -63,71 +63,81 @@ const TENANT_LENDER_NEWS = {
             level: "MEDIUM",
             company: "Clopay",
             cat: "Tenant",
-            headline: "Griffon cuts FY2026 guidance a second time; Q1 HBP EBITDA down 3% YoY; Clopay wins Best of IBS Award",
-            summary: "Griffon Corporation (NYSE: GFF), parent of Clopay Building Products, issued a second consecutive guidance reduction, citing weakening housing starts. Q1 FY2026 Home & Building Products EBITDA was <b>$122.8M, down 3% YoY</b>, with residential volumes down 4% on higher material and labor costs. The CPP segment was a bright spot, up 19% YoY at $21.7M. FY2026 revenue guidance stands at ~$2.5B with EBITDA of $580–600M. Griffon entered a definitive agreement with <b>ONCAP to form a joint venture</b> creating a global hand tools/home organization company, expected to close by end of June 2026. Clopay won the <b>Best of IBS Award</b> at the 2026 NAHB International Builders' Show for its Avante door with C-Power Click-to-Conceal Panels. Griffon declared a <b>$0.22 quarterly dividend</b>.",
-            relevance: "Consecutive guidance cuts tied to housing softness remain a monitoring flag for Clopay leases. The HBP volume decline is directly tied to lower new residential construction — relevant context for any Clopay expansion discussions. However, the ONCAP JV restructures non-Clopay segments, potentially sharpening focus on Clopay as the core division. Product innovation and the earnings beat are positive offsets.",
-            source: "Yahoo Finance / PR Newswire / StockTitan",
-            date: "2026-04-10"
+            headline: "Wall Street Zen downgrades GFF to Hold (Apr 19); second consecutive guidance cut; Q1 HBP EBITDA down 3% YoY; Clopay wins Best of IBS Award",
+            summary: "Wall Street Zen downgraded Griffon Corporation (NYSE: GFF), parent of Clopay Building Products, from Buy to Hold on <b>April 19</b>, citing weakening housing starts. This follows a second consecutive guidance reduction: Q1 FY2026 Home & Building Products EBITDA was <b>$122.8M, down 3% YoY</b>, with residential volumes down 4% on higher material and labor costs. FY2026 revenue guidance stands at ~$2.5B with EBITDA of $580–600M. Griffon entered a definitive agreement with <b>ONCAP to form a joint venture</b> creating a global hand tools/home organization company, expected to close by end of June 2026. Clopay won the <b>Best of IBS Award</b> at the 2026 NAHB International Builders' Show for its Avante door with C-Power Click-to-Conceal Panels.",
+            relevance: "Consecutive guidance cuts and a second analyst downgrade tied to housing softness remain monitoring flags for Clopay leases. The HBP volume decline is directly tied to lower new residential construction. However, the ONCAP JV restructures non-Clopay segments, and product innovation remains strong. Watch for any further analyst coverage changes.",
+            source: "Daily Political / StockTitan / Yahoo Finance / PR Newswire",
+            date: "2026-04-19"
         },
         {
             level: "MEDIUM",
             company: "Busey Bank",
             cat: "Lender",
-            headline: "Declares $0.26 Q2 dividend (April 14); designated CEO successor terminated; new Scottsdale corporate center open",
-            summary: "First Busey Corp declared a <b>$0.26 quarterly dividend</b> on April 14 (record date April 24, payable May 1) — signaling stable capital position. In prior weeks: Busey separated from Michael J. Maddox — the former bank president and board-designated successor CEO — effective January 27, 2026, only months after the $917M CrossFirst acquisition closed. Maddox received <b>$8.5M+ in cash severance</b> plus full equity vest acceleration. CEO Van Dukeman was reinstated to both roles. Busey opened a new <b>15,000 SF corporate center</b> in Scottsdale, AZ on April 2, now operating <b>80 locations across 10 states</b> post-CrossFirst merger.",
-            relevance: "The Q2 dividend declaration and Scottsdale expansion indicate institutional stability despite the CEO reversal. Monitor whether the CrossFirst integration friction affects lending appetite or relationship continuity with Jackson Shaw.",
-            source: "The Cerbat Gem / StockTitan / TipRanks / Bjerk Builders",
-            date: "2026-04-14"
+            headline: "Q1 earnings April 28; ~$9M former-CEO severance charge expected; $0.26 Q2 dividend declared; new Scottsdale corporate center open",
+            summary: "First Busey Corp reports Q1 2026 earnings on <b>April 28</b> — analyst consensus EPS ~$0.57. Watch for the <b>~$9M non-recurring pre-tax severance charge</b> related to former designated CEO successor Michael J. Maddox, who was separated in January 2026 only months after the $917M CrossFirst acquisition. Maddox received $8.5M+ in cash severance plus full equity vest acceleration; CEO Van Dukeman was reinstated to both roles. Separately, Busey declared a <b>$0.26 quarterly dividend</b> on April 14 (record date April 24, payable May 1) — signaling stable capital position. Busey opened a new <b>15,000 SF corporate center</b> in Scottsdale, AZ on April 2, now operating <b>80 locations across 10 states</b> post-CrossFirst merger.",
+            relevance: "The Q1 earnings call on April 28 is the first post-Maddox earnings event — watch for CrossFirst integration update and any lending appetite signals for Texas CRE. The dividend declaration indicates capital stability. Monitor whether integration friction affects relationship continuity with Jackson Shaw.",
+            source: "The Cerbat Gem / StockTitan / TipRanks / MarketBeat",
+            date: "2026-04-24"
         },
         {
             level: "LOW",
             company: "Huntington Bank",
             cat: "Lender",
-            headline: "Named Official Bank of University of Michigan; Q1 2026 earnings April 23; ~$280B in assets across 21 states",
-            summary: "Huntington Bancshares is reporting Q1 2026 earnings on <b>April 23</b>; analysts are watching loan growth in Texas following the completion of the <b>Cadence Bank ($7.4B)</b> and <b>Veritex</b> acquisitions. Now the 8th-largest bank in Texas and operating across <b>21 states with ~$280B in assets</b>. On April 6, Huntington was named <b>Official Consumer Bank of the University of Michigan</b>, covering 100,000+ students and faculty and including $250K in scholarships. The Cadence systems conversion is targeted for mid-2026. Projecting <b>11–12% loan growth</b> and <b>8–9% deposit growth</b> for 2026.",
-            relevance: "A significantly expanded Huntington with deep DFW commercial lending roots via Veritex is a major positive for Texas-market CRE borrowers. Integration period through mid-2026 could create temporary processing delays. Watch Q1 earnings call April 23 for DFW loan volume commentary and any credit quality signals.",
-            source: "Huntington IR / StockTitan / American Banker",
-            date: "2026-04-06"
+            headline: "Q1 2026 beats — NII +33% YoY, adjusted EPS $0.37, $3B buyback authorized; Cadence/Veritex integration targeting Q2 completion",
+            summary: "Huntington Bancshares reported Q1 2026 on <b>April 23</b>: <b>net income $523M</b>, adjusted EPS <b>$0.37 (beat)</b>, NII <b>+33% YoY</b>, noninterest income <b>+17% QoQ</b>. The board approved a <b>$3B share repurchase authorization</b>, targeting ~$550M in 2026. The <b>Veritex systems conversion</b> (completed January) and <b>Cadence Bank partnership close</b> (February 1) are effectively done; full integration expected <b>Q2 2026</b>. Piper Sandler upgraded HBAN to Neutral following results. Now the 8th-largest bank in Texas operating across <b>21 states with ~$280B in assets</b>. Projecting <b>11–12% loan growth</b> and <b>8–9% deposit growth</b> for 2026.",
+            relevance: "A significantly expanded Huntington with deep DFW commercial lending roots via Cadence and Veritex is a major positive for Texas-market CRE borrowers. The strong Q1 print, buyback authorization, and integration progress confirm Huntington as a top-tier relationship lender for the Jackson Shaw pipeline. Watch Q1 earnings call transcript for DFW loan volume commentary.",
+            source: "Huntington IR / PR Newswire / Piper Sandler / StockTitan",
+            date: "2026-04-23"
         },
         {
             level: "LOW",
             company: "Fifth Third Bank",
             cat: "Lender",
-            headline: "Comerica merger complete; 9th largest U.S. bank ($294B assets); 150 new Texas branches planned; Q1 earnings April 17",
-            summary: "Fifth Third completed its all-stock acquisition of Comerica, creating the <b>9th-largest U.S. bank with $294B in assets</b> across 17 of the 20 fastest-growing large U.S. markets. Plans <b>150 new branches</b> in Dallas, Houston, and Austin by 2029 ($600M investment). Named to <b>Forbes World's Best Banks 2026</b>. Chief Credit Officer Greg Schroeck retiring, with Kristof Schneider as successor. Q1 2026 earnings due <b>April 17</b> (today). Stock at ~$49.52 prior to results.",
-            relevance: "A significantly enlarged Fifth Third is now a top-tier regional lender with major Texas presence — directly relevant to Jackson Shaw's CRE pipeline. Credit leadership transition during active integration is a monitoring item. Watch today's Q1 earnings call for NII trajectory and any CRE credit commentary.",
-            source: "Fifth Third IR / Forbes / Rutland Herald",
-            date: "2026-02-02"
+            headline: "Q1 2026: Adj EPS $0.83 beats ($0.62 est), revenue $2.83B slight miss; NIM +17bps; targeting $850M Comerica cost savings by Q4",
+            summary: "Fifth Third reported Q1 2026 on <b>April 17</b>: adjusted EPS <b>$0.83</b> (beat vs. $0.62 estimated), revenue <b>$2.83B</b> (slight miss of ~$104M). NII $1.94B; NIM <b>3.30% (+17bps)</b>. Full-year NII guidance raised to <b>$8.7–8.8B</b>. The <b>Comerica acquisition</b> — largest M&A in FITB history — is complete, creating the <b>9th-largest U.S. bank with $294B in assets</b> across 17 of the 20 fastest-growing large U.S. markets, including plans for <b>150 new Texas branches</b> in Dallas, Houston, and Austin by 2029 ($600M investment). Targeting <b>$850M annual run-rate cost savings</b> by Q4 2026. Chief Credit Officer Greg Schroeck retiring; Kristof Schneider as successor.",
+            relevance: "A significantly enlarged Fifth Third is now a top-tier regional lender with major and expanding Texas presence. Credit leadership transition during active Comerica integration is a monitoring item. The NIM expansion and raised NII guidance indicate improving earnings quality heading into Q2.",
+            source: "Fifth Third IR / Forbes / PR Newswire",
+            date: "2026-04-17"
         },
         {
             level: "LOW",
             company: "Simmons Bank",
             cat: "Lender",
-            headline: "Q1 2026 earnings released April 16; CEO Jay Brogdon's first full quarter; recognized as one of America's Best Regional Banks",
-            summary: "Simmons First released Q1 2026 earnings <b>April 16</b> (after market close); earnings call at 7:30am CT April 17. CEO <b>Jay Brogdon</b> (assumed role Jan. 1, 2026) leads a stable institution with <b>$78.1M net income</b> in Q4 2025 and a <b>$175M stock repurchase program</b>. Recognized by <b>Newsweek</b> as one of America's Best Regional Banks 2026 and by <b>Forbes</b> as one of America's Best-In-State Companies.",
-            relevance: "Q1 results are now available — check call transcript for credit quality metrics and any CRE-specific commentary. No material concerns flagged in advance of the release.",
-            source: "Simmons IR / Newsweek / Forbes",
+            headline: "Q1 2026: Net income $68.5M, revenue $241M (+15.2% YoY), loans +10% QoQ annualized, NIM 3.84%; revenue missed estimates",
+            summary: "Simmons First released Q1 2026 on <b>April 16</b>: net income <b>$68.5M</b> ($0.47 EPS), revenue <b>$241M (+15.2% YoY)</b>, loans grew <b>10% linked-quarter annualized</b> to $17.9B, NIM improved to <b>3.84%</b>. Despite the strong profit and loan growth, revenue modestly missed analyst forecasts. CEO <b>Jay Brogdon</b> (assumed role Jan. 1, 2026) leads a stable institution with a <b>$175M stock repurchase program</b>. Recognized by Newsweek as one of America's Best Regional Banks 2026 and by Forbes as one of America's Best-In-State Companies.",
+            relevance: "No material concerns. The NIM expansion and double-digit loan growth signal a bank with improving earnings power. Watch upcoming quarters for any CRE-specific credit quality commentary.",
+            source: "Simmons IR / Arkansas Business / StockTitan",
             date: "2026-04-16"
+        },
+        {
+            level: "GENERAL",
+            company: "Hartford Insurance",
+            cat: "Tenant",
+            headline: "Q1 2026: Net income +36% to $856M, diluted EPS $3.04; non-GAAP EPS $3.09 missed consensus; operating cash flow $1.045B",
+            summary: "The Hartford (NYSE: HIG) reported Q1 2026 on <b>April 23</b>: <b>net income $856M (+36% YoY)</b>, diluted EPS <b>$3.04</b>, revenue <b>$7.23B (+6.1% YoY)</b>. Non-GAAP EPS of <b>$3.09 missed consensus by ~8.8%</b>, which tempered the otherwise strong result. Operating cash flow was <b>$1.045B</b>. Strong underwriting performance across commercial lines drove the profit growth.",
+            relevance: "Hartford Insurance is a strong credit tenant — net income up 36% and cash flow of $1B+ underscore institutional financial health. The non-GAAP EPS miss was a market expectation issue rather than an operational problem. No lease concerns.",
+            source: "StockTitan / GuruFocus / Hartford IR",
+            date: "2026-04-23"
         },
         {
             level: "GENERAL",
             company: "Lincoln Tech",
             cat: "Tenant",
-            headline: "Record growth: Q1 starts +19%, FY2026 guidance $580–590M, stock +77% YTD; Rowlett TX campus on track for Q1 2027",
-            summary: "Lincoln Educational Services reported Q4/FY results with <b>+19.7% YoY revenue</b>, well above estimates, and issued FY2026 guidance of <b>$580M–$590M revenue</b> (vs. $518M in 2025) and <b>$72M–$76M adjusted EBITDA</b>. Stock up <b>~77% YTD</b> to ~$43.50, with Northland Securities setting a <b>$44 price target</b> on April 9. New campuses: Houston, TX (February 18), Levittown PA (relocated to 90,000 SF), with Hicksville NY (Q4 2026) and <b>Rowlett, TX (Q1 2027)</b> next. At its March 19 Investor Day, management outlined a path to <b>$850M revenue by 2030</b> with doubled EBITDA and tripled net income.",
-            relevance: "Lincoln Tech is the strongest tenant story in the portfolio. The Rowlett, TX campus (Q1 2027) is directly in Jackson Shaw's market. Exceptional credit quality, accelerating growth, and active multi-city expansion.",
+            headline: "Q1 2026 earnings call scheduled May 11; credit facility increased to $125M; stock +80% YTD; Rowlett TX campus on track for Q1 2027",
+            summary: "Lincoln Educational Services scheduled its <b>Q1 2026 earnings release and call for May 11</b> (before 9:30am ET). Context: FY2025 delivered <b>+19.7% YoY revenue</b>, and FY2026 guidance stands at <b>$580M–$590M revenue</b> and <b>$72M–$76M adjusted EBITDA</b>. Lincoln increased its <b>credit facility to $125M</b> to fund the ongoing campus expansion. Stock up <b>~80% YTD</b> to ~$44.10. New campuses: Houston TX (February 18), Levittown PA (relocated, 90,000 SF), with Hicksville NY (Q4 2026) and <b>Rowlett, TX (Q1 2027)</b> next. March 19 Investor Day outlined a path to <b>$850M revenue by 2030</b>.",
+            relevance: "Lincoln Tech remains the strongest tenant story in the portfolio. Expanded credit facility supports growth without leverage risk. The Rowlett, TX campus (Q1 2027) is directly in Jackson Shaw's market. Watch May 11 Q1 results for Q1 student starts update and Rowlett construction milestone.",
             source: "GlobeNewsWire / Lincoln Ed IR / SimplyWallSt",
-            date: "2026-04-09"
+            date: "2026-04-17"
         },
         {
             level: "GENERAL",
             company: "PACE Equities",
             cat: "Lender",
-            headline: "Closes $23.5M C-PACE deal for 436-unit multifamily in Celina, TX; record industry originations",
-            summary: "PACE Equity closed <b>$23.5M in C-PACE capital</b> for the <b>Jefferson Ownsby Complex</b>, a 436-unit Class A multifamily community in <b>Celina, Texas</b> (north DFW). Industry-wide, C-PACE originations hit a record <b>$3.5B in 2025</b>, with individual deals frequently exceeding $100M. PACE Equity's 2026 outlook projects continued double-digit growth, with recapitalizations still leading demand. Director of Lending Partnerships <b>Eli Terry</b> appointed to deepen bank relationships.",
-            relevance: "Direct equity partner actively deploying capital in the DFW market. C-PACE continues mainstreaming as a CRE financing tool — the Celina deal demonstrates local market activity.",
-            source: "PACE Equity / CNBC / Bisnow",
-            date: "2026-03-15"
+            headline: "Wheeler County TX launches C-PACE program (Apr 22), expanding Lone Star PACE to 29 Texas jurisdictions; $23.5M Celina TX deal closed",
+            summary: "Wheeler County launched its inaugural C-PACE program on <b>April 22</b>, administered by Lone Star PACE, expanding to <b>29 Texas jurisdictions</b>. Industry-wide, C-PACE originations hit a record <b>$3.5B in 2025</b>, with average deal sizes now reaching <b>~$40M</b> (vs. $800K in 2017). Earlier this year, PACE Equity closed <b>$23.5M in C-PACE capital</b> for the <b>Jefferson Ownsby Complex</b> in Celina, TX (436-unit Class A multifamily, north DFW). Director of Lending Partnerships <b>Eli Terry</b> appointed to deepen bank relationships. PACE Equity's 2026 outlook projects continued double-digit origination growth.",
+            relevance: "Direct equity partner actively deploying capital across the DFW market. Expanding Texas jurisdiction coverage makes C-PACE increasingly viable as a financing tool for Jackson Shaw projects outside core DFW counties. The Celina deal demonstrates local market activity at the north DFW frontier.",
+            source: "PACE Equity / GlobeNewswire / CNBC / Bisnow",
+            date: "2026-04-22"
         },
         {
             level: "GENERAL",

@@ -515,6 +515,20 @@ a.ticker-item .pct.down { color: #f87171; }
 .stock-table td.num.up   { color: var(--success); }
 .stock-table td.num.down { color: var(--danger); }
 
+.stock-table td.bar-cell {
+    padding-bottom: 5px;
+    line-height: 1.2;
+}
+.bar-track {
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-top: 4px;
+    overflow: hidden;
+}
+.bar-fill.up   { height: 100%; border-radius: 2px; background: var(--success); opacity: 0.75; }
+.bar-fill.down { height: 100%; border-radius: 2px; background: var(--danger);  opacity: 0.75; }
+
 /* --- Tenant & Lender News --- */
 .tl-content { width: 100%; }
 

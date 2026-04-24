@@ -171,11 +171,11 @@
                         '<td class="company"><a href="' + yurl + '" target="_blank" rel="noopener">' + s.company + '</a></td>' +
                         '<td class="ticker"><a href="' + yurl + '" target="_blank" rel="noopener">' + s.ticker + '</a></td>' +
                         '<td class="num">' + fmtPrice(L.price) + '</td>' +
-                        pctCell(L.dayPct) + pctCell(ytd) +
+                        pctCell(L.dayPct) + barCell(ytd, 50) +
                         '<td class="num">' + fmtPrice(h52) + '</td>' +
-                        pctCell(vsH) +
+                        barCell(vsH, 40) +
                         '<td class="num">' + fmtPrice(l52) + '</td>' +
-                        pctCell(vsL) +
+                        barCell(vsL, 100) +
                         '</tr>';
                 } else if (fetchDone && !L) {
                     // Fetch complete but no live data (index, rate-limited, or API error) — use static
@@ -183,11 +183,11 @@
                         '<td class="company"><a href="' + yurl + '" target="_blank" rel="noopener">' + s.company + '</a></td>' +
                         '<td class="ticker"><a href="' + yurl + '" target="_blank" rel="noopener">' + s.ticker + '</a></td>' +
                         '<td class="num">' + fmtPrice(s.price) + '</td>' +
-                        pctCell(s.day_pct) + pctCell(s.ytd_pct) +
+                        pctCell(s.day_pct) + barCell(s.ytd_pct, 50) +
                         '<td class="num">' + fmtPrice(s.high_52w) + '</td>' +
-                        pctCell(s.vs_high) +
+                        barCell(s.vs_high, 40) +
                         '<td class="num">' + fmtPrice(s.low_52w) + '</td>' +
-                        pctCell(s.vs_low) +
+                        barCell(s.vs_low, 100) +
                         '</tr>';
                 } else {
                     // Still loading
@@ -369,6 +369,19 @@
         var cls  = val >= 0 ? 'up' : 'down';
         var sign = val > 0 ? '+' : '';
         return '<td class="num ' + cls + '">' + sign + val.toFixed(1) + '%</td>';
+    }
+
+    // Like pctCell but adds a proportional mini bar below the number.
+    // maxAbs is the value that fills the bar to 100% width.
+    function barCell(val, maxAbs) {
+        if (val == null) return '<td class="num bar-cell"></td>';
+        var cls  = val >= 0 ? 'up' : 'down';
+        var sign = val > 0 ? '+' : '';
+        var pct  = Math.min(Math.abs(val) / maxAbs, 1) * 100;
+        return '<td class="num bar-cell ' + cls + '">' +
+            sign + val.toFixed(1) + '%' +
+            '<div class="bar-track"><div class="bar-fill ' + cls + '" style="width:' + pct.toFixed(1) + '%"></div></div>' +
+            '</td>';
     }
 
     // ----------------------------------------------------------------

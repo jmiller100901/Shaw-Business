@@ -1,137 +1,139 @@
-// Friday Finance — Week of April 24, 2026
+// Friday Finance — Week of May 1, 2026
 // Replace this file each week with updated data (same structure)
 
 const FRIDAY_FINANCE = {
-    date: "April 24, 2026",
-    date_short: "4.24.26",
+    date: "May 1, 2026",
+    date_short: "5.1.26",
 
     quote: {
-        text: "Markets can remain irrational longer than you can remain solvent.",
-        author: "John Maynard Keynes"
+        text: "Risk means more things can happen than will happen.",
+        author: "Howard Marks"
     },
 
     ticker_bar: [
-        { symbol: "SPX",  price: "7,138", change_pct: 0.40 },
-        { symbol: "DJIA", price: "49,490", change_pct: 0.30 },
-        { symbol: "IXIC", price: "24,658", change_pct: 0.70 },
-        { symbol: "NVDA", price: "196.35", change_pct: 0.80 },
-        { symbol: "JPM",  price: "318.00", change_pct: 0.40 },
-        { symbol: "DAL",  price: "70.55", change_pct: -0.30 },
-        { symbol: "XOM",  price: "153.50", change_pct: 0.50 },
-        { symbol: "AMZN", price: "244.10", change_pct: 0.60 },
-        { symbol: "TSLA", price: "356.20", change_pct: 0.20 },
-        { symbol: "PLD",  price: "138.00", change_pct: 0.30 },
-        { symbol: "BX",   price: "124.00", change_pct: 0.60 }
+        { symbol: "SPX",  price: "7,247", change_pct: 0.50 },
+        { symbol: "DJIA", price: "50,210", change_pct: 0.20 },
+        { symbol: "IXIC", price: "25,090", change_pct: 0.70 },
+        { symbol: "NVDA", price: "201.22", change_pct: 0.60 },
+        { symbol: "AAPL", price: "271.35", change_pct: 4.10 },
+        { symbol: "MSFT", price: "414.30", change_pct: -0.80 },
+        { symbol: "AMZN", price: "265.06", change_pct: 1.20 },
+        { symbol: "TSLA", price: "378.97", change_pct: 0.60 },
+        { symbol: "PLD",  price: "143.50", change_pct: 0.90 },
+        { symbol: "BX",   price: "126.20", change_pct: 0.30 },
+        { symbol: "IP",   price: "31.80", change_pct: -1.40 }
     ],
 
     news_bullets: [
-        "<b>Earnings season delivered a mixed verdict — Tesla beat but the market wanted more.</b> <b>Tesla (TSLA)</b> posted Q1 adjusted EPS of <b>$0.41 vs. $0.37 estimated</b> on revenue of <b>$22.39B (+15.8% YoY)</b>, with auto revenue +16% and free cash flow recovering. The beat was partially offset by Musk's announcement of <b>$25B+ in 2026 CapEx</b> (up from $20B) for AI and Optimus — shares gave back initial after-hours gains. Elsewhere, <b>GE Aerospace</b> reported EPS $1.86 (+25% YoY) and $1.7B free cash flow but fell 4–6% on unchanged full-year guidance. <b>IBM</b> beat on EPS ($1.91 vs. $1.81) and revenue (+9% YoY) with software up 11% and Z mainframe up 51%, but held full-year guidance flat, sending shares down 6–10%. <b>Boeing</b> — revenue $22.2B (+14% YoY), narrowed net loss to just $7M, and hit a record $695B backlog, though free cash flow remains negative at -$1.5B. <b>United Airlines</b> cut full-year EPS guidance to <b>$7–$11 (from $12–$14)</b> on fuel costs and demand softness tied to the Iran war. <b>CRE angle:</b> Airline guidance cuts reflect ongoing fuel-cost pressure rippling through tenants with logistics and travel exposure. Boeing's $695B backlog is a positive signal for industrial demand tied to aerospace supply chains. The 3M and Intel reports (Tuesday) round out the week. Next week's Mag-7 earnings — Apple, Amazon, Meta, Microsoft — will set the narrative for Q2.",
+        "<b>S&P 500 closes above 7,200 for the first time ever — best month since 2020 powered by Mag-7 earnings.</b> The <b>S&P 500 broke through 7,200</b> this week to close at a record high, the <b>Nasdaq</b> notched a new all-time closing high, and both indexes posted their <b>strongest monthly performance since 2020</b>. The Dow logged its best month since November 2024. The rally was driven by a clean sweep of Mag-7 beats: <b>Apple</b> jumped <b>4%+</b> after a record Q2 — revenue <b>$111.2B (+17% YoY)</b>, iPhone revenue <b>$57.99B (+22%)</b> on iPhone 17 demand, services revenue <b>$30.98B</b> (record), and a new <b>$100B buyback authorization</b>. <b>Microsoft</b> reported FQ3 revenue <b>$82.89B (+18%)</b> with AI now at a <b>$37B annualized run rate</b> (+123% YoY) — but the stock fell on a guided <b>$190B AI capex</b> ramp. <b>Amazon</b> Q1 revenue <b>$181.5B (+17%)</b>, EPS <b>$2.78 vs. $1.62 estimated</b>; Q2 sales guided to $194–$199B. <b>Meta</b> revenue <b>$56.3B</b>, EPS $10.44 (boosted by an $8B tax benefit), but raised 2026 capex guidance to <b>$125–$145B</b>. <b>Alphabet</b> revenue <b>$109.9B</b>; Google Cloud <b>$20B</b> beat by ~$2B. Combined hyperscaler 2026 AI capex now exceeds <b>$650B</b>. <b>CRE angle:</b> The hyperscaler capex tsunami is the single most consequential demand signal for industrial and data center development. Prologis (see CRE bullet) is leaning hard into BTS data centers; expect every industrial REIT and developer to follow.",
 
-        "<b>Retail sales surged in March, PMI turned higher in April — but inflation is sticky at 3.3%.</b> March retail sales came in at <b>$752.1B (+1.7% MoM, +4.0% YoY)</b> — a solid consumer spending print, though analysts widely attributed the beat to tariff-driven front-loading rather than organic demand. The April flash <b>Composite PMI jumped to 52.0</b> (from 50.3 in March), the first clear expansion signal of 2026. On the inflation side, March CPI was <b>+3.3% YoY</b> (highest since April 2024), driven almost entirely by a <b>+10.9% surge in energy costs</b> tied to the Iran war. The <b>FOMC meets April 28–29</b> — CME FedWatch prices near-zero probability of a rate move; the Fed has been on hold at <b>3.50–3.75%</b> since last fall. Powell's press conference language on the inflation-growth tradeoff will matter far more than the decision itself. Larger macro data drops landing <b>Wednesday April 30:</b> Q1 GDP Advance Estimate, Employment Cost Index, and PCE Deflator (the Fed's preferred inflation gauge). <b>CRE angle:</b> A sticky inflation print combined with no rate cuts reduces near-term refi relief. Energy-driven CPI is the key distinction — if oil normalizes post-Iran, inflation could fall sharply without the Fed needing to cut. Watch PCE on April 30 for the most policy-relevant read.",
+        "<b>FOMC holds at 3.50–3.75% in Powell's final meeting — but PCE surge to 4.5% changes the calculus.</b> The Fed held rates at <b>3.50–3.75%</b> on April 29 in what was widely expected to be Chair <b>Powell's last FOMC meeting</b> (term expires May 15). The decision was <b>unusually contentious</b> — the FOMC voted 11–1 on the rate decision, but <b>four total dissents</b> emerged on the easing-bias language (Hammack, Kashkari, Logan), the highest dissent count <b>since 1992</b>. Powell framed the macro backdrop as <b>'four supply shocks'</b> — pandemic, Ukraine, tariffs, and Iran/oil. The April 30 data deluge complicated the picture sharply: <b>Q1 GDP came in at +2.0%</b> (vs. +2.3% expected), but the killer print was <b>PCE inflation</b> — headline jumped to <b>+4.5%</b> from 2.9% in Q4 2025, and core PCE accelerated to <b>+4.3%</b> from 2.7%. Tariff pass-through and Iran-driven energy costs are the primary drivers. Markets had been pricing one cut later in 2026; the PCE shock pushed expectations toward 'higher for longer' through year-end. Trump indicated he will not reappoint Powell as chair; Kevin Warsh remains the leading replacement candidate. <b>CRE angle:</b> A 4.5% PCE print at unchanged Fed funds is the worst near-term outcome for refi math. Cap rate compression is dead for now. The Fed cannot cut into a 4%+ inflation print — borrowers should plan for SOFR holding above 3.6% through Q3.",
 
-        "<b>Iran ceasefire holding — barely — as Pakistan-hosted peace talks loom Tuesday.</b> US and Iranian negotiators are heading to Islamabad for a <b>second round of direct peace talks</b> on Tuesday April 28. The ceasefire extension has held, and Trump pulled back from strikes on Iranian power plants and bridges again this week. Markets rallied mid-week on ceasefire optimism before pulling back Thursday on stalled Hormuz shipping news. <b>Brent crude closed Friday at ~$104.63/barrel</b> (WTI ~$94.75), down from the ~$109–120 war peak but still roughly <b>$40 above pre-war levels</b>. The Strait of Hormuz remains partially blockaded — ~20M barrels/day of oil flow that transited the strait daily is still impaired. The IEA has called this the <b>largest energy security threat in history</b>. National diesel is running ~$4.80/gallon; gasoline ~$4.16. A lasting peace deal is estimated to return Brent to the low-$70s within six months as Iranian production ramps. A ceasefire breakdown would immediately spike oil toward <b>$115–120/barrel</b>. <b>CRE angle:</b> This remains the single most consequential variable for CRE operating costs over the next 90 days. Diesel at $4.80 is straining trucking operators in the industrial portfolio. Airlines — Delta, American, Southwest — have added fuel surcharges with margins under pressure. Tuesday's Pakistan talks are the week's biggest binary event.",
+        "<b>Iran peace talks collapse mid-week — Brent locked at ~$106, oil costs the persistent CRE drag.</b> The second round of Pakistan-mediated US-Iran talks <b>fell apart on April 26</b> when Trump cancelled the Witkoff/Kushner trip to Islamabad after Iran doubled down on Hormuz closure rhetoric. Brent crude jumped <b>+2%+ to $107.89</b> on the news, then settled at <b>~$106.55</b> through week-end. The Strait of Hormuz remains <b>partially blockaded</b> and the IEA continues to flag this as the largest energy security disruption in modern history. Iran sent a <b>fresh peace proposal</b> to mediators on May 1 — the next negotiation cycle is unscheduled. Diesel sits at <b>~$4.85/gallon</b> nationally; gasoline ~$4.20. The April 30 <b>PCE 4.5% print</b> directly reflects this — energy was the single-largest contributor to the inflation surge. <b>CRE angle:</b> The Iran shock is now <b>locked in for the next 60–90 days</b> as a structural cost driver. Industrial tenant operating margins (trucking, logistics, food/beverage) are taking the hit. Airline guidance cuts (United, Delta) and packaging margin compression (IP results below) all flow back to the same source. A Brent retracement to the $80s would be an outsized macro positive for CRE — but it requires a credible peace breakthrough that markets no longer expect this quarter.",
 
-        "<b>Tariffs driving CRE construction costs up ~6% in 2026 — but industrial lending is surging.</b> Steel, aluminum, and copper face <b>50% tariffs</b>, pushing materials costs for CRE projects up an estimated <b>~6.0% in 2026</b> with total project costs up <b>~3.0%</b>. Residential construction shed approximately <b>60,000 jobs since December 2024</b> as builder activity froze — driven more by tariff uncertainty than direct cost increases. The counterpoint: <b>industrial CRE lending volume surged over 150%</b> in the most recent six-month period versus the prior six months, driven by stable tenant demand and clean industrial underwriting. Lender competition has reached its highest point since 2022 (avg. 5.2 competing quotes per deal). On the distress side, CMBS delinquency remains elevated at <b>9.6%</b> with overall distress at <b>12.07%</b> — concentrated in office and older multifamily rather than industrial. <b>CRE angle:</b> For Jackson Shaw's development pipeline, the tariff cost pressure is real and must be underwritten carefully at the project level. However, the surge in industrial lender appetite suggests Jackson Shaw is in the most favorable borrower position in the CRE capital stack today. Industrial fundamentals remain intact — demand healthy, new supply constrained, and lender competition intense.",
+        "<b>International Paper Q1: EMEA EBITDA outlook cut, 31 closures booked, 12–15 month spin timeline confirmed.</b> IP reported Q1 2026 on April 30 — the most consequential single earnings event for Jackson Shaw lease counterparty risk this quarter. Key takeaways: the <b>EMEA spin-off will close in 12–15 months</b> with IP retaining a <b>20% stake</b> for 12–18 months post-split; <b>EMEA full-year EBITDA outlook was reduced to $900M–$1.0B</b> from $1.0–1.1B; the company has now booked <b>31 facility closures</b> and reduced <b>2,800+ positions</b> en route to <b>$200M in EMEA run-rate savings</b>; and the NORPAC acquisition ($360M, ~1M tons containerboard) is integrating on plan. Stock dropped on the EMEA cut despite a revenue beat. The North American business is showing commercial traction with mill productivity gains. <b>Hartford Insurance</b> Q1 was a positive print — net income <b>$856M (+36%)</b>, EPS $3.04, $617M returned to shareholders. <b>Crown Holdings</b> Q1 beat — adj EPS $1.86 (+11%), beverage volumes +5%. <b>Crown Equipment</b> (forklifts, our tenant) reported April order inflows <b>+10–20% YoY</b> — solid demand signal. <b>CRE angle:</b> The IP North American business remains structurally healthy and lease obligations should remain with the post-split RemainCo. Confirm none of the 31 closed facilities sit in the Jackson Shaw portfolio (likely concentrated in EMEA) — that is the single most actionable item from the IP call.",
 
-        "<b>Huntington posts strong Q1 after Cadence/Veritex integrations — regional bank health broadly positive.</b> <b>Huntington Bancshares (HBAN)</b> reported Q1 2026 on April 23: <b>net income $523M</b>, adjusted EPS <b>$0.37 (beat)</b>, NII <b>+33% YoY</b>, noninterest income +17% QoQ. The board approved a <b>$3B share repurchase authorization</b>, targeting $550M in 2026. The Veritex systems conversion (January) and Cadence Bank partnership close (February 1) are effectively done; full integration expected <b>Q2 2026</b>. Piper Sandler upgraded HBAN to Neutral following results. <b>Fifth Third (FITB)</b> also beat on adjusted EPS ($0.83 vs. $0.62 estimated) — though revenue of $2.83B slightly missed — as NIM improved 17bps to 3.30% following Comerica integration. <b>Simmons Bank</b> reported Q1 net income of $68.5M on $241M revenue (+15.2% YoY), with loans growing 10% linked-quarter annualized and NIM expanding to 3.84%. <b>Busey Bank (BUSE)</b> reports Q1 on <b>April 28</b> — watch for the former CEO Maddox severance charge (~$9M non-recurring pre-tax) in the results. <b>CRE angle:</b> Three of Jackson Shaw's key lending relationships are reporting strong-to-solid fundamentals this quarter. Huntington's rapid integration of Cadence/Veritex makes it one of the most active Texas-market commercial lenders — expect strong DFW pipeline commentary on the earnings call transcript."
+        "<b>Industrial REIT supercycle confirmed — Prologis Q1 records, but lender mix is a tale of two banks.</b> <b>Prologis</b> delivered a record Q1: <b>64M SF of new logistics leases</b> signed (an all-time first-quarter record), revenue <b>$2.3B (+7.5%)</b>, core FFO <b>$1.44B</b>, net income <b>$980M</b> (vs. $592M Q1 2025). Management <b>raised core FFO guidance to $6.07–$6.23</b> from prior $6.00–$6.20. Notably, Prologis started <b>$1.3B in data center build-to-suits</b> in Q1, with <b>1.3 GW under LOI</b> and a total power pipeline of <b>5.6 GW</b>. On the lender side, the Q1 reports diverged: <b>Busey</b> beat handily — adj EPS <b>$0.67 vs. $0.59 estimated</b>, revenue +39.4% YoY, NPAs at just 0.28% of assets — the post-Maddox quarter cleaned up cleanly. <b>Bank OZK</b> missed: net income <b>down 5.1% to $159.3M</b>, EPS $1.44 vs. $1.46 estimated, and <b>nonperforming assets more than doubled</b> to $451M (from $214M Q1 2025). On the broader CMBS picture, <b>Trepp's March print was 7.55%</b> overall delinquency (+41bps); <b>office hit 11.71%</b> (+51bps), with <b>~$25B in CMBS loans now past maturity</b> without payoff or formal extension — pre-2008-cleanup levels. <b>CRE angle:</b> Industrial fundamentals are the cleanest in CRE — Prologis' +64M SF lease quarter validates the demand thesis. Lender-by-lender selection now matters materially: HBAN, FITB, BUSE all clean post-Q1; OZK is showing the first credit cracks. The CMBS office distress remains contained to the office sector, not industrial."
     ],
 
-    watch_next_week: "<b>The biggest week of earnings season converges with the FOMC meeting and a critical Iran peace negotiation.</b> <b>Tuesday April 28:</b> US-Iran negotiators meet in Islamabad for a second round of talks — the most important binary event for oil prices and CRE operating costs. A breakthrough would send Brent toward $85; a breakdown spikes oil toward $115+. Also Tuesday: <b>Busey Bank (BUSE)</b> Q1 earnings — watch for the ~$9M former-CEO severance charge and integration progress after CrossFirst. <b>Wednesday April 29:</b> The <b>FOMC announces at 2:00 PM ET</b>. Zero probability of a rate move; Chair Powell's language on the inflation-growth tradeoff and any shift in tone on rate cuts will set the bond market narrative for Q2. Also Wednesday: <b>Meta and Microsoft</b> report. <b>Wednesday April 30:</b> The economic data deluge — <b>Q1 GDP Advance Estimate</b> (the first read on 2026 growth; consensus ~+2.0%); <b>Employment Cost Index</b>; and the <b>PCE Deflator</b> (the Fed's preferred inflation gauge). Also April 30: <b>International Paper (IP)</b> Q1 earnings after market — critical for Jackson Shaw's lease counterparty risk assessment. Analyst consensus: EPS ~$0.23, revenue guidance $24.1–24.9B; watch for any update on the EMEA spin-off timeline and which successor entity holds North American lease obligations. <b>Apple and Amazon</b> also report Thursday May 1. The week's data dump on April 30 — GDP + PCE + IP earnings — will be the most consequential 24-hour window for CRE capital markets in months.",
+    watch_next_week: "<b>The first week of May pivots from earnings to labor data and the Powell succession.</b> <b>Friday May 8: April Nonfarm Payrolls</b> — the most important macro print of the week. Consensus is for ~165K jobs added with the unemployment rate steady at 4.1%. A weak print combined with the 4.5% PCE creates the worst-case stagflation framing for risk assets; a strong print reinforces 'higher for longer' and pressures rate-sensitive sectors. <b>Tuesday May 5–6:</b> The <b>next FOMC meeting begins May 5</b> (decision May 6) — note this is an unusually quick succession after the April 28–29 meeting and the dissent dynamic from last week makes the press conference a market-mover. <b>Powell succession:</b> Powell's term as chair expires <b>May 15</b>; expect a Trump announcement on Warsh (or alternative) within days. <b>Earnings continuing:</b> Major industrial REIT and tenant follow-through reports — including <b>Bank OZK</b> investor day, <b>Lincoln Tech (LINC)</b> reports Q1 on <b>May 11</b> (watch for Rowlett TX construction milestone and Q1 student starts), and <b>Simmons (SFNC)</b> investor day. <b>Iran negotiation track:</b> Iran's May 1 fresh peace proposal needs a US response; any thaw signal would send Brent toward the $80s and is the single largest macro upside catalyst available. <b>Tariff watch:</b> The China 10% tariff arrangement runs through Nov 10, 2026, but watch for any mid-cycle Section 232 expansion announcements that would further pressure CRE construction costs.",
 
     reading_links: [
         {
-            title: "Tesla Q1 2026 Financial Results: EPS Beats, Revenue Narrows, CapEx Raised to $25B+",
-            url: "https://electrek.co/2026/04/22/tesla-tsla-q1-2026-financial-results/",
-            source: "Electrek",
-            description: "Full breakdown of Tesla's Q1 beat — adjusted EPS $0.41 vs. $0.37 estimated, auto revenue +16% YoY, and Musk's surprise $25B+ CapEx guidance for AI and Optimus that tempered initial after-hours enthusiasm."
+            title: "Apple Q2 2026 Results: $111.2B Revenue, iPhone +22%, Services Hit $30.98B Record",
+            url: "https://9to5mac.com/2026/04/30/apple-reports-q2-2026-earnings-111-2-billion-in-revenue-up-17/",
+            source: "9to5Mac",
+            description: "Comprehensive breakdown of Apple's record Q2 — iPhone 17 demand drove a 22% surge in iPhone revenue, services hit a new all-time high of $30.98B, and the board authorized an additional $100B in buybacks. The single largest earnings event of the week."
         },
         {
-            title: "Oil Prices Fall Friday on Reports of Pakistan-Hosted Iran Peace Talks",
-            url: "https://www.cnbc.com/2026/04/24/oil-price-wti-brent-after-israel-lebanon-ceasefire-extension.html",
+            title: "Fed Holds Rates Steady at 3.50–3.75% in Powell's Final FOMC Meeting; 4 Dissents — Highest Since 1992",
+            url: "https://www.cnbc.com/2026/04/29/fed-interest-rate-decision-april-2026.html",
             source: "CNBC",
-            description: "Friday oil market update: Brent ~$104.63, WTI ~$94.75. Covers the ceasefire extension, Hormuz disruption status, and the Tuesday Islamabad peace talks setup — the most important macro event for CRE operating costs next week."
+            description: "Detailed coverage of the April 28–29 FOMC. Rate held; four dissents on the easing-bias language; Powell's 'four supply shocks' framing; and the implications of the contentious vote heading into the May 5–6 meeting and Powell's May 15 term expiration."
         },
         {
-            title: "Tariffs and CRE Construction: By the Numbers",
-            url: "https://www.connectcre.com/stories/tariffs-and-cre-construction-by-the-numbers/",
-            source: "Connect CRE",
-            description: "Detailed breakdown of tariff impacts on CRE project costs — 50% tariffs on steel, aluminum, and copper; ~6% materials cost inflation; ~60K residential construction jobs lost since Dec 2024. Useful underwriting context for any new starts."
+            title: "Q1 GDP +2.0% Advance Estimate; PCE Inflation Surges to 4.5% Headline, 4.3% Core",
+            url: "https://www.bea.gov/news/2026/gdp-advance-estimate-1st-quarter-2026",
+            source: "U.S. Bureau of Economic Analysis",
+            description: "Official BEA release. The PCE acceleration from 2.9% to 4.5% (headline) is the single most market-moving line in the report — driven by tariff pass-through and Iran-related energy costs. The data complicates any near-term Fed easing path."
         },
         {
-            title: "Huntington Bancshares Reports Q1 2026 Earnings — NII +33% YoY, $3B Buyback Authorized",
-            url: "https://www.prnewswire.com/news-releases/huntington-bancshares-incorporated-reports-2026-first-quarter-earnings-302751610.html",
+            title: "International Paper Q1 2026: EMEA EBITDA Outlook Cut to $900M–$1.0B; 31 Closures Booked",
+            url: "https://www.prnewswire.com/news-releases/international-paper-reports-first-quarter-2026-results-302758029.html",
             source: "PR Newswire",
-            description: "Official Q1 press release from Huntington. Net income $523M, adjusted EPS $0.37 (beat), Cadence/Veritex integrations largely complete with full integration targeted Q2. The most relevant earnings release of the week for Jackson Shaw's lending relationships."
+            description: "Official Q1 release with the full EMEA spin-off update — 12–15 month timeline, 20% retained stake, $200M EMEA run-rate savings target. Critical reading for any Jackson Shaw property with IP as a counterparty."
         },
         {
-            title: "FOMC Meeting Calendar and April 28–29 Preview",
-            url: "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
-            source: "Federal Reserve",
-            description: "Official Fed calendar with the April 28–29 meeting confirmed. Rates expected on hold at 3.50–3.75%. Use this alongside the April 30 GDP/PCE data drops to track the policy path for the rest of 2026."
+            title: "Trepp: CMBS Delinquency Hits 7.55% in March; Office Surges to 11.71% with $25B Past Maturity",
+            url: "https://newslink.mba.org/mba-newslinks/2026/april/trepp-cmbs-delinquency-rate-increases/",
+            source: "MBA NewsLink",
+            description: "The April Trepp report shows office distress at post-2008 levels with ~$25B of CMBS loans past maturity without payoff or formal extension. Distress remains concentrated in office, not industrial — useful framing for borrower competitive positioning."
         }
     ],
 
     rates: {
-        "1-Mo Term SOFR":     { current: "3.653%", one_mo_ago: "3.641%", one_yr_ago: "4.390%" },
-        "10-Year Treasury":   { current: "4.420%", one_mo_ago: "4.290%", one_yr_ago: "4.386%" },
-        "Eff. Federal Funds": { current: "3.643%", one_mo_ago: "3.640%", one_yr_ago: "4.330%" },
+        "1-Mo Term SOFR":     { current: "3.654%", one_mo_ago: "3.643%", one_yr_ago: "4.380%" },
+        "10-Year Treasury":   { current: "4.420%", one_mo_ago: "4.310%", one_yr_ago: "4.450%" },
+        "Eff. Federal Funds": { current: "3.650%", one_mo_ago: "3.643%", one_yr_ago: "4.330%" },
         "Prime Rate":         { current: "6.750%", one_mo_ago: "6.750%", one_yr_ago: "7.500%" }
     },
 
     stocks: {
         "Indices": [
-            { company: "S&P 500",              ticker: "SPX",  price: 7137.90,  day_pct: 0.40,  ytd_pct: 3.5,   high_52w: 7165.00,  vs_high: -0.4,  low_52w: 5101.63,  vs_low: 39.9 },
-            { company: "Dow Jones Industrial",  ticker: "DJI",  price: 49490.03, day_pct: 0.30,  ytd_pct: 3.0,   high_52w: 50512.79, vs_high: -2.0,  low_52w: 37830.66, vs_low: 30.8 },
-            { company: "Nasdaq Composite",      ticker: "COMP", price: 24657.57, day_pct: 0.70,  ytd_pct: 1.4,   high_52w: 24850.00, vs_high: -0.8,  low_52w: 15685.33, vs_low: 57.2 }
+            { company: "S&P 500",              ticker: "SPX",  price: 7247.40,  day_pct: 0.50,  ytd_pct: 5.1,   high_52w: 7247.40,  vs_high: 0.0,   low_52w: 5101.63,  vs_low: 42.1 },
+            { company: "Dow Jones Industrial",  ticker: "DJI",  price: 50212.55, day_pct: 0.20,  ytd_pct: 4.5,   high_52w: 50512.79, vs_high: -0.6,  low_52w: 37830.66, vs_low: 32.7 },
+            { company: "Nasdaq Composite",      ticker: "COMP", price: 25088.14, day_pct: 0.70,  ytd_pct: 3.2,   high_52w: 25088.14, vs_high: 0.0,   low_52w: 15685.33, vs_low: 59.9 }
         ],
         "Industrial REITs": [
-            { company: "Prologis",              ticker: "PLD",  price: 138.00, day_pct: 0.30,  ytd_pct: 6.9,   high_52w: 143.95, vs_high: -4.1,  low_52w: 85.35,  vs_low: 61.7 },
-            { company: "Rexford Industrial",    ticker: "REXR", price: 34.10,  day_pct: 0.30,  ytd_pct: -10.8, high_52w: 44.38,  vs_high: -23.1, low_52w: 29.68,  vs_low: 14.9 },
-            { company: "EastGroup Properties",  ticker: "EGP",  price: 193.20, day_pct: 0.50,  ytd_pct: 7.5,   high_52w: 193.20, vs_high: 0.0,   low_52w: 143.20, vs_low: 34.9 },
-            { company: "First Industrial",      ticker: "FR",   price: 60.35,  day_pct: 0.50,  ytd_pct: 6.5,   high_52w: 60.35,  vs_high: 0.0,   low_52w: 42.80,  vs_low: 41.0 },
-            { company: "Terreno Realty",         ticker: "TRNO", price: 63.65,  day_pct: 0.35,  ytd_pct: 0.9,   high_52w: 67.30,  vs_high: -5.4,  low_52w: 48.10,  vs_low: 32.3 },
-            { company: "Stag Industrial",        ticker: "STAG", price: 39.20,  day_pct: 0.30,  ytd_pct: 6.6,   high_52w: 40.10,  vs_high: -2.2,  low_52w: 31.20,  vs_low: 25.6 },
-            { company: "Americold Realty",        ticker: "COLD", price: 23.80,  day_pct: 0.40,  ytd_pct: -3.8,  high_52w: 28.50,  vs_high: -16.5, low_52w: 19.80,  vs_low: 20.2 },
-            { company: "LXP Industrial",          ticker: "LXP",  price: 8.75,   day_pct: 0.25,  ytd_pct: -6.1,  high_52w: 10.50,  vs_high: -16.7, low_52w: 7.20,   vs_low: 21.5 },
-            { company: "Ryman Hospitality",       ticker: "RHP",  price: 105.60, day_pct: 0.60,  ytd_pct: 2.6,   high_52w: 118.00, vs_high: -10.5, low_52w: 80.20,  vs_low: 31.7 }
+            { company: "Prologis",              ticker: "PLD",  price: 143.50, day_pct: 0.90,  ytd_pct: 11.1,  high_52w: 145.20, vs_high: -1.2,  low_52w: 85.35,  vs_low: 68.1 },
+            { company: "Rexford Industrial",    ticker: "REXR", price: 35.20,  day_pct: 0.45,  ytd_pct: -7.9,  high_52w: 44.38,  vs_high: -20.7, low_52w: 29.68,  vs_low: 18.6 },
+            { company: "EastGroup Properties",  ticker: "EGP",  price: 196.80, day_pct: 0.60,  ytd_pct: 9.5,   high_52w: 196.80, vs_high: 0.0,   low_52w: 143.20, vs_low: 37.4 },
+            { company: "First Industrial",      ticker: "FR",   price: 61.20,  day_pct: 0.45,  ytd_pct: 8.0,   high_52w: 61.20,  vs_high: 0.0,   low_52w: 42.80,  vs_low: 43.0 },
+            { company: "Terreno Realty",         ticker: "TRNO", price: 64.85,  day_pct: 0.55,  ytd_pct: 2.8,   high_52w: 67.30,  vs_high: -3.6,  low_52w: 48.10,  vs_low: 34.8 },
+            { company: "Stag Industrial",        ticker: "STAG", price: 39.80,  day_pct: 0.40,  ytd_pct: 8.2,   high_52w: 40.10,  vs_high: -0.7,  low_52w: 31.20,  vs_low: 27.6 },
+            { company: "Americold Realty",        ticker: "COLD", price: 24.05,  day_pct: 0.50,  ytd_pct: -2.8,  high_52w: 28.50,  vs_high: -15.6, low_52w: 19.80,  vs_low: 21.5 },
+            { company: "LXP Industrial",          ticker: "LXP",  price: 8.85,   day_pct: 0.30,  ytd_pct: -5.0,  high_52w: 10.50,  vs_high: -15.7, low_52w: 7.20,   vs_low: 22.9 },
+            { company: "Ryman Hospitality",       ticker: "RHP",  price: 107.20, day_pct: 0.50,  ytd_pct: 4.2,   high_52w: 118.00, vs_high: -9.2,  low_52w: 80.20,  vs_low: 33.7 }
         ],
         "Hospitality REITs": [
-            { company: "Host Hotels & Resorts",   ticker: "HST",  price: 20.75, day_pct: 1.40,  ytd_pct: 6.3,   high_52w: 21.00,  vs_high: -1.2,  low_52w: 12.12, vs_low: 71.2 },
-            { company: "Apple REIT",              ticker: "APLE", price: 12.70, day_pct: 1.20,  ytd_pct: -3.0,  high_52w: 14.80,  vs_high: -14.2, low_52w: 10.40, vs_low: 22.1 },
-            { company: "Park Hotels & Resorts",   ticker: "PK",   price: 11.05, day_pct: 1.10,  ytd_pct: -9.8,  high_52w: 14.10,  vs_high: -21.6, low_52w: 9.60,  vs_low: 15.1 },
-            { company: "Pebblebrook Hotel",       ticker: "PEB",  price: 14.18, day_pct: 1.50,  ytd_pct: 9.8,   high_52w: 14.18, vs_high: 0.0,   low_52w: 7.41,  vs_low: 91.4 },
-            { company: "Sunstone Hotel",          ticker: "SHO",  price: 9.65,  day_pct: 1.30,  ytd_pct: -3.9,  high_52w: 12.27,  vs_high: -21.4, low_52w: 7.45,  vs_low: 29.5 },
-            { company: "RLJ Lodging Trust",       ticker: "RLJ",  price: 8.10,  day_pct: 1.20,  ytd_pct: -3.6,  high_52w: 9.80,   vs_high: -17.3, low_52w: 6.16,  vs_low: 31.5 },
-            { company: "DiamondRock Hospitality", ticker: "DRH",  price: 10.27, day_pct: 1.20,  ytd_pct: 2.7,   high_52w: 10.67,  vs_high: -3.7,  low_52w: 6.16,  vs_low: 66.7 },
-            { company: "Summit Hotel Properties", ticker: "INN",  price: 4.65,  day_pct: 0.70,  ytd_pct: -24.6, high_52w: 6.00,   vs_high: -22.5, low_52w: 3.57,  vs_low: 30.3 }
+            { company: "Host Hotels & Resorts",   ticker: "HST",  price: 21.10, day_pct: 0.50,  ytd_pct: 8.1,   high_52w: 21.30,  vs_high: -0.9,  low_52w: 12.12, vs_low: 74.1 },
+            { company: "Apple REIT",              ticker: "APLE", price: 12.85, day_pct: 0.40,  ytd_pct: -1.8,  high_52w: 14.80,  vs_high: -13.2, low_52w: 10.40, vs_low: 23.6 },
+            { company: "Park Hotels & Resorts",   ticker: "PK",   price: 11.20, day_pct: 0.45,  ytd_pct: -8.6,  high_52w: 14.10,  vs_high: -20.6, low_52w: 9.60,  vs_low: 16.7 },
+            { company: "Pebblebrook Hotel",       ticker: "PEB",  price: 14.30, day_pct: 0.40,  ytd_pct: 10.7, high_52w: 14.30, vs_high: 0.0,   low_52w: 7.41,  vs_low: 93.0 },
+            { company: "Sunstone Hotel",          ticker: "SHO",  price: 9.80,  day_pct: 0.50,  ytd_pct: -2.4,  high_52w: 12.27,  vs_high: -20.1, low_52w: 7.45,  vs_low: 31.5 },
+            { company: "RLJ Lodging Trust",       ticker: "RLJ",  price: 8.20,  day_pct: 0.40,  ytd_pct: -2.4,  high_52w: 9.80,   vs_high: -16.3, low_52w: 6.16,  vs_low: 33.1 },
+            { company: "DiamondRock Hospitality", ticker: "DRH",  price: 10.40, day_pct: 0.40,  ytd_pct: 4.0,   high_52w: 10.67,  vs_high: -2.5,  low_52w: 6.16,  vs_low: 68.8 },
+            { company: "Summit Hotel Properties", ticker: "INN",  price: 4.72,  day_pct: 0.35,  ytd_pct: -23.5, high_52w: 6.00,   vs_high: -21.3, low_52w: 3.57,  vs_low: 32.2 }
         ],
         "Lenders": [
-            { company: "Blackstone",          ticker: "BX",   price: 124.00, day_pct: 0.60,  ytd_pct: -19.0, high_52w: 190.09, vs_high: -34.8, low_52w: 101.73, vs_low: 21.9 },
-            { company: "Fifth Third Bancorp", ticker: "FITB", price: 50.25,  day_pct: 1.00,  ytd_pct: 7.1,   high_52w: 55.44,  vs_high: -9.4,  low_52w: 31.20,  vs_low: 61.1 },
-            { company: "Huntington Bancshares", ticker: "HBAN", price: 17.35,  day_pct: 4.70,  ytd_pct: 0.5,   high_52w: 19.50,  vs_high: -11.0, low_52w: 11.91,  vs_low: 45.7 },
-            { company: "BancFirst",           ticker: "BANF", price: 119.50, day_pct: 0.55,  ytd_pct: 0.4,   high_52w: 138.77, vs_high: -13.9, low_52w: 97.02,  vs_low: 23.2 },
-            { company: "Busey",               ticker: "BUSE", price: 26.75,  day_pct: 0.50,  ytd_pct: 0.3,   high_52w: 27.65,  vs_high: -3.3,  low_52w: 18.40,  vs_low: 45.4 },
-            { company: "Bank OZK",            ticker: "OZK",  price: 49.90,  day_pct: 0.55,  ytd_pct: 3.2,   high_52w: 53.66,  vs_high: -7.0,  low_52w: 35.71,  vs_low: 39.7 },
-            { company: "The Hartford",        ticker: "HIG",  price: 142.50, day_pct: 0.60,  ytd_pct: 11.4,  high_52w: 144.50, vs_high: -1.4,  low_52w: 107.49, vs_low: 32.6 }
+            { company: "Blackstone",          ticker: "BX",   price: 126.20, day_pct: 0.30,  ytd_pct: -17.6, high_52w: 190.09, vs_high: -33.6, low_52w: 101.73, vs_low: 24.1 },
+            { company: "Fifth Third Bancorp", ticker: "FITB", price: 51.10,  day_pct: 0.50,  ytd_pct: 8.9,   high_52w: 55.44,  vs_high: -7.8,  low_52w: 31.20,  vs_low: 63.8 },
+            { company: "Huntington Bancshares", ticker: "HBAN", price: 17.65,  day_pct: 0.55,  ytd_pct: 2.3,   high_52w: 19.50,  vs_high: -9.5,  low_52w: 11.91,  vs_low: 48.2 },
+            { company: "BancFirst",           ticker: "BANF", price: 120.80, day_pct: 0.40,  ytd_pct: 1.5,   high_52w: 138.77, vs_high: -13.0, low_52w: 97.02,  vs_low: 24.5 },
+            { company: "Busey",               ticker: "BUSE", price: 27.55,  day_pct: 0.65,  ytd_pct: 3.3,   high_52w: 27.95,  vs_high: -1.4,  low_52w: 18.40,  vs_low: 49.7 },
+            { company: "Bank OZK",            ticker: "OZK",  price: 47.30,  day_pct: -0.45, ytd_pct: -2.2,  high_52w: 53.66,  vs_high: -11.9, low_52w: 35.71,  vs_low: 32.5 },
+            { company: "The Hartford",        ticker: "HIG",  price: 144.30, day_pct: 0.40,  ytd_pct: 12.8,  high_52w: 146.10, vs_high: -1.2,  low_52w: 107.49, vs_low: 34.3 }
         ],
         "Industry-related companies": [
-            { company: "Amazon",               ticker: "AMZN", price: 244.10, day_pct: 0.60,  ytd_pct: 5.7,   high_52w: 258.60, vs_high: -5.6,  low_52w: 165.29, vs_low: 47.7 },
-            { company: "United Parcel Service", ticker: "UPS", price: 105.30, day_pct: 0.75,  ytd_pct: -5.1,  high_52w: 122.41, vs_high: -14.0, low_52w: 82.00,  vs_low: 28.4 },
-            { company: "FedEx Corporation",    ticker: "FDX",  price: 385.00, day_pct: 0.60,  ytd_pct: 2.5,   high_52w: 392.86, vs_high: -2.0,  low_52w: 194.30, vs_low: 98.2 },
-            { company: "Target Corporation",   ticker: "TGT",  price: 128.50, day_pct: 0.50,  ytd_pct: 11.2,  high_52w: 128.50, vs_high: 0.0,   low_52w: 83.44,  vs_low: 54.0 },
-            { company: "GXO Logistics",        ticker: "GXO",  price: 55.50,  day_pct: 0.55,  ytd_pct: 12.8,  high_52w: 66.85,  vs_high: -17.0, low_52w: 30.46,  vs_low: 82.2 },
-            { company: "Marriott International", ticker: "MAR", price: 365.00, day_pct: 1.30,  ytd_pct: 13.3,  high_52w: 370.00, vs_high: -1.4,  low_52w: 205.40, vs_low: 77.7 },
-            { company: "Hilton Hotels",         ticker: "HLT",  price: 334.00, day_pct: 1.10,  ytd_pct: 6.0,   high_52w: 334.00, vs_high: 0.0,   low_52w: 201.15, vs_low: 66.0 },
-            { company: "American Airlines",    ticker: "AAL",  price: 11.70,  day_pct: -1.30, ytd_pct: -10.7, high_52w: 16.50,  vs_high: -29.1, low_52w: 8.92,   vs_low: 31.2 },
-            { company: "Southwest Airlines",   ticker: "LUV",  price: 41.80,  day_pct: 0.90,  ytd_pct: 5.3,   high_52w: 55.11,  vs_high: -24.1, low_52w: 23.82,  vs_low: 75.5 },
-            { company: "Las Vegas Sands",      ticker: "LVS",  price: 56.10,  day_pct: 0.60,  ytd_pct: -0.8,  high_52w: 70.45,  vs_high: -20.4, low_52w: 30.18,  vs_low: 85.9 },
-            { company: "TSMC",                 ticker: "TSM",  price: 378.00, day_pct: 0.85,  ytd_pct: 6.5,   high_52w: 390.21, vs_high: -3.1,  low_52w: 145.84, vs_low: 159.2 },
-            { company: "Delta Airlines",       ticker: "DAL",  price: 70.55,  day_pct: -0.30, ytd_pct: 2.2,   high_52w: 76.39,  vs_high: -7.6,  low_52w: 36.56,  vs_low: 93.0 },
-            { company: "Ferguson Enterprises", ticker: "FERG", price: 260.00, day_pct: 0.55,  ytd_pct: 10.8,  high_52w: 271.64, vs_high: -4.3,  low_52w: 146.00, vs_low: 78.1 },
-            { company: "International Paper",  ticker: "IP",   price: 35.10,  day_pct: -1.10, ytd_pct: -32.0, high_52w: 56.13,  vs_high: -37.5, low_52w: 33.57,  vs_low: 4.6 },
-            { company: "Tandy Leather Factory", ticker: "TLF", price: 4.90,   day_pct: 0.0,   ytd_pct: -1.0,  high_52w: 6.10,   vs_high: -19.7, low_52w: 4.10,   vs_low: 19.5 },
-            { company: "Lincoln Tech",         ticker: "LINC", price: 44.10,  day_pct: 0.65,  ytd_pct: 80.1,  high_52w: 44.20,  vs_high: -0.2,  low_52w: 14.79,  vs_low: 198.2 },
-            { company: "Tesla",                ticker: "TSLA", price: 356.20, day_pct: 0.20,  ytd_pct: 1.0,   high_52w: 488.54, vs_high: -27.1, low_52w: 214.30, vs_low: 66.2 }
+            { company: "Amazon",               ticker: "AMZN", price: 265.06, day_pct: 1.20,  ytd_pct: 14.8,  high_52w: 268.90, vs_high: -1.4,  low_52w: 165.29, vs_low: 60.4 },
+            { company: "Apple",                ticker: "AAPL", price: 271.35, day_pct: 4.10,  ytd_pct: 15.2,  high_52w: 271.35, vs_high: 0.0,   low_52w: 168.30, vs_low: 61.2 },
+            { company: "Microsoft",            ticker: "MSFT", price: 414.30, day_pct: -0.80, ytd_pct: 6.4,   high_52w: 462.10, vs_high: -10.3, low_52w: 332.50, vs_low: 24.6 },
+            { company: "United Parcel Service", ticker: "UPS", price: 106.40, day_pct: 0.50,  ytd_pct: -4.1,  high_52w: 122.41, vs_high: -13.1, low_52w: 82.00,  vs_low: 29.8 },
+            { company: "FedEx Corporation",    ticker: "FDX",  price: 388.50, day_pct: 0.45,  ytd_pct: 3.5,   high_52w: 392.86, vs_high: -1.1,  low_52w: 194.30, vs_low: 100.0 },
+            { company: "Target Corporation",   ticker: "TGT",  price: 129.80, day_pct: 0.40,  ytd_pct: 12.3,  high_52w: 132.10, vs_high: -1.7,  low_52w: 83.44,  vs_low: 55.6 },
+            { company: "GXO Logistics",        ticker: "GXO",  price: 56.20,  day_pct: 0.55,  ytd_pct: 14.2,  high_52w: 66.85,  vs_high: -16.0, low_52w: 30.46,  vs_low: 84.5 },
+            { company: "Marriott International", ticker: "MAR", price: 368.50, day_pct: 0.55,  ytd_pct: 14.4,  high_52w: 372.40, vs_high: -1.0,  low_52w: 205.40, vs_low: 79.4 },
+            { company: "Hilton Hotels",         ticker: "HLT",  price: 337.20, day_pct: 0.50,  ytd_pct: 7.0,   high_52w: 337.20, vs_high: 0.0,   low_52w: 201.15, vs_low: 67.6 },
+            { company: "American Airlines",    ticker: "AAL",  price: 11.55,  day_pct: -0.55, ytd_pct: -11.8, high_52w: 16.50,  vs_high: -30.0, low_52w: 8.92,   vs_low: 29.5 },
+            { company: "Southwest Airlines",   ticker: "LUV",  price: 41.95,  day_pct: 0.30,  ytd_pct: 5.7,   high_52w: 55.11,  vs_high: -23.9, low_52w: 23.82,  vs_low: 76.1 },
+            { company: "Las Vegas Sands",      ticker: "LVS",  price: 56.80,  day_pct: 0.45,  ytd_pct: 0.4,   high_52w: 70.45,  vs_high: -19.4, low_52w: 30.18,  vs_low: 88.2 },
+            { company: "TSMC",                 ticker: "TSM",  price: 381.50, day_pct: 0.65,  ytd_pct: 7.5,   high_52w: 390.21, vs_high: -2.2,  low_52w: 145.84, vs_low: 161.6 },
+            { company: "Delta Airlines",       ticker: "DAL",  price: 70.80,  day_pct: -0.20, ytd_pct: 2.5,   high_52w: 76.39,  vs_high: -7.3,  low_52w: 36.56,  vs_low: 93.7 },
+            { company: "Ferguson Enterprises", ticker: "FERG", price: 263.40, day_pct: 0.60,  ytd_pct: 12.2,  high_52w: 271.64, vs_high: -3.0,  low_52w: 146.00, vs_low: 80.4 },
+            { company: "International Paper",  ticker: "IP",   price: 31.80,  day_pct: -1.40, ytd_pct: -38.4, high_52w: 56.13,  vs_high: -43.4, low_52w: 31.00,  vs_low: 2.6 },
+            { company: "Tandy Leather Factory", ticker: "TLF", price: 4.95,   day_pct: 0.20,  ytd_pct: 0.0,   high_52w: 6.10,   vs_high: -18.9, low_52w: 4.10,   vs_low: 20.7 },
+            { company: "Lincoln Tech",         ticker: "LINC", price: 45.10,  day_pct: 0.50,  ytd_pct: 84.2,  high_52w: 45.10,  vs_high: 0.0,   low_52w: 14.79,  vs_low: 204.9 },
+            { company: "Tesla",                ticker: "TSLA", price: 378.97, day_pct: 0.60,  ytd_pct: 7.5,   high_52w: 488.54, vs_high: -22.4, low_52w: 214.30, vs_low: 76.8 }
         ]
     }
 };

@@ -1,9 +1,9 @@
-// Tenant & Lender News — Week of April 24, 2026
+// Tenant & Lender News — Week of May 1, 2026
 // Replace this file each week with updated scan results (same structure)
 
 const TENANT_LENDER_NEWS = {
-    date: "April 24, 2026",
-    last_scan: "2026-04-24T18:00:00Z",
+    date: "May 1, 2026",
+    last_scan: "2026-05-01T18:00:00Z",
 
     // Jackson Shaw watchlist — tenants, lenders, equity partners
     companies: [
@@ -29,6 +29,7 @@ const TENANT_LENDER_NEWS = {
         { id: "19", name: "Barings",                             cat: "Lender" },
         { id: "20", name: "Hall Group",                          cat: "Lender" },
         { id: "21", name: "PACE Equities",                       cat: "Lender" },
+        { id: "24", name: "Bank OZK",                            cat: "Lender" },
         { id: "22", name: "Sammons Enterprise",                  cat: "Equity Partner" },
     ],
 
@@ -43,11 +44,21 @@ const TENANT_LENDER_NEWS = {
             level: "HIGH",
             company: "International Paper",
             cat: "Tenant",
-            headline: "Q1 earnings April 30; NORPAC acquisition $360M; EMEA spin-off in progress; 7+ closures and 500+ layoffs; stock -32% YTD",
-            summary: "IP Q1 2026 earnings are due <b>April 30 after market close</b> — analyst consensus EPS ~$0.23 (flat YoY), revenue guidance $24.1–24.9B. Key watch items: any update on the <b>EMEA spin-off timeline</b> and which successor entity will hold North American lease obligations post-split; status of the <b>7+ facility closures</b> targeting ~500 roles by end of 2026; and the <b>NORPAC acquisition</b> ($360M, ~500 employees, ~1M tons/year containerboard) that closed April 16. Background: IP recorded a <b>$2.47B non-cash goodwill impairment</b> on EMEA operations for FY2025 and a net loss of $2.84B. JPMorgan placed IP on <b>Negative Catalyst Watch</b> (April 5), cutting the price target to <b>$46.00</b>. Stock is down <b>~32% YTD</b>.",
-            relevance: "The April 30 earnings call is the most critical event for Jackson Shaw's lease counterparty risk assessment this quarter. It is still unclear which post-split entity (IP North America vs. the EMEA spinco) will hold existing North American lease obligations. Facility closures create direct lease risk if any IP-occupied Jackson Shaw properties are among the 7+ targeted for permanent closure. Confirm which specific plants are slated for closure.",
-            source: "IP Investor Relations / GuruFocus / Packaging Dive / JPMorgan Research / StockTitan",
-            date: "2026-04-24"
+            headline: "Q1 2026 results: EMEA EBITDA outlook cut to $900M–$1.0B; 31 facility closures and 2,800+ positions eliminated; spinoff in 12–15 months with 20% retained stake",
+            summary: "IP reported Q1 2026 on <b>April 30</b>. Key updates: the <b>EMEA spin-off will close in 12–15 months</b> with IP retaining a <b>20% stake</b> for 12–18 months post-split. <b>Full-year EMEA EBITDA outlook cut to $900M–$1.0B</b> (from $1.0–1.1B). The company has now booked <b>31 facility closures</b> with <b>2,800+ positions reduced</b> en route to <b>$200M in EMEA run-rate savings</b>. North American business is showing commercial traction with mill productivity gains and is outgrowing the market. The <b>NORPAC acquisition</b> ($360M, ~1M tons containerboard, ~500 employees) is integrating on plan after closing April 16. Stock fell on the EMEA outlook cut despite a revenue beat — IP now down <b>~38% YTD</b>. Q1 was pressured by tougher macro conditions, ongoing inflation, and a severe winter storm.",
+            relevance: "The Q1 print confirms two key items for Jackson Shaw: (1) North American lease obligations should remain with the post-split RemainCo, not the EMEA spinco — reducing counterparty ambiguity. (2) The 31 closed facilities are concentrated in EMEA but confirm none of the closures sit in any Jackson Shaw-owned IP property. Watch for Q2 results in late July for further closure-list disclosure and any North American footprint optimization.",
+            source: "IP Investor Relations / PR Newswire / Packaging Dive / Motley Fool / Insider Monkey",
+            date: "2026-04-30"
+        },
+        {
+            level: "MEDIUM",
+            company: "Bank OZK",
+            cat: "Lender",
+            headline: "Q1 2026 misses: Net income -5.1% to $159.3M, EPS $1.44 vs. $1.46 est; nonperforming assets more than double to $451M; CRE charge-offs concentrated",
+            summary: "Bank OZK reported Q1 2026 on <b>April 21</b>: net income <b>$159.3M (-5.1% YoY)</b> from $167.9M, diluted EPS <b>$1.44</b> (missed $1.46 estimate). Revenue $661.5M (-1.3%). The headline credit deterioration: <b>nonperforming assets more than doubled to $451M</b> (from $214M Q1 2025); <b>net charge-offs $45.3M</b> vs. $19M a year ago, concentrated in <b>three previously classified real estate loans</b>. Non-interest expenses climbed 12% to $164.5M, with salaries +15.1% as the bank builds out CIB, trust/wealth, and mortgage. Management reiterated mid-single-digit loan growth for 2026, weighted to Q2–Q4. Stock down ~2% YTD post-print.",
+            relevance: "First credit-quality cracks visible at a major CRE lender. The doubling of NPAs and the concentration in previously-classified real estate loans is the first material warning sign in the watchlist this cycle. Jackson Shaw should not assume OZK pricing or covenant terms remain as competitive going forward — the bank is signaling a more selective stance. Monitor whether the three loans roll into the loss column and whether further classifications follow in Q2.",
+            source: "Bank OZK IR / Arkansas Business / Motley Fool / StockTitan / The Globe and Mail",
+            date: "2026-04-21"
         },
         {
             level: "MEDIUM",
@@ -70,14 +81,14 @@ const TENANT_LENDER_NEWS = {
             date: "2026-04-19"
         },
         {
-            level: "MEDIUM",
+            level: "LOW",
             company: "Busey Bank",
             cat: "Lender",
-            headline: "Q1 earnings April 28; ~$9M former-CEO severance charge expected; $0.26 Q2 dividend declared; new Scottsdale corporate center open",
-            summary: "First Busey Corp reports Q1 2026 earnings on <b>April 28</b> — analyst consensus EPS ~$0.57. Watch for the <b>~$9M non-recurring pre-tax severance charge</b> related to former designated CEO successor Michael J. Maddox, who was separated in January 2026 only months after the $917M CrossFirst acquisition. Maddox received $8.5M+ in cash severance plus full equity vest acceleration; CEO Van Dukeman was reinstated to both roles. Separately, Busey declared a <b>$0.26 quarterly dividend</b> on April 14 (record date April 24, payable May 1) — signaling stable capital position. Busey opened a new <b>15,000 SF corporate center</b> in Scottsdale, AZ on April 2, now operating <b>80 locations across 10 states</b> post-CrossFirst merger.",
-            relevance: "The Q1 earnings call on April 28 is the first post-Maddox earnings event — watch for CrossFirst integration update and any lending appetite signals for Texas CRE. The dividend declaration indicates capital stability. Monitor whether integration friction affects relationship continuity with Jackson Shaw.",
-            source: "The Cerbat Gem / StockTitan / TipRanks / MarketBeat",
-            date: "2026-04-24"
+            headline: "Q1 2026 beats: Adj EPS $0.67 vs. $0.59 est; revenue +39.4% YoY to $196.2M; NPAs at 0.28% of assets; clean post-Maddox quarter",
+            summary: "First Busey Corp reported Q1 2026 on <b>April 28</b>: net income <b>$50.0M ($0.52 diluted EPS)</b>, adjusted EPS <b>$0.67 (beat $0.59 est by $0.08)</b>. Revenue <b>$196.2M (+39.4% YoY)</b>. Asset quality remained clean — <b>NPAs just 0.28% of total assets</b>, down 4 bps from December and 3 bps from Q1 2025. Total assets $18.04B post-CrossFirst. The non-recurring Maddox severance charge (~$9M pre-tax) was the GAAP/adjusted EPS gap. CEO Van Dukeman reinstated to both roles. Net margin jumped to 25.7%. Q2 dividend $0.26 (paid May 1). The company now operates 80 locations across 10 states.",
+            relevance: "A clean post-Maddox print with strong asset quality and revenue growth reduces relationship continuity risk. The 0.28% NPA ratio is excellent and contrasts sharply with Bank OZK's deterioration. Busey remains a stable Texas-CRE lending partner. Watch upcoming quarters for any CrossFirst integration milestones and Texas-specific loan volume commentary.",
+            source: "First Busey IR / GlobeNewswire / StockTitan / Quiver Quantitative / Simply Wall St",
+            date: "2026-04-28"
         },
         {
             level: "LOW",
@@ -111,23 +122,43 @@ const TENANT_LENDER_NEWS = {
         },
         {
             level: "GENERAL",
+            company: "Crown Equipment",
+            cat: "Tenant",
+            headline: "Q1 earnings call (April 28): April order inflows running 10–20% above prior year; demand signal solid for forklift segment",
+            summary: "Crown Equipment Corporation held its Q1 2026 earnings call on <b>April 28</b>. Management disclosed that <b>April order inflows are running at rates 10–20% higher than the same period in 2025</b> — a strong real-time demand signal for the material handling/forklift segment. The company continues to deepen workforce pipelines, including ongoing partnerships with Lincoln Tech campuses (Mahwah NJ, Houston TX) for diesel/automotive technician recruitment. Crown has been synonymous with quality lifts since 1960 and remains a privately held leader in the segment.",
+            relevance: "Direct positive signal for Crown Equipment lease performance. April orders +10–20% YoY indicates underlying tenant business remains healthy through the tariff and Iran-driven cost shocks. The Lincoln Tech recruitment connection is a useful cross-tenant data point as well — it implies sustained workforce investment, which historically correlates with capacity utilization at occupied facilities. No lease concerns.",
+            source: "Crown (CCK) Earnings Coverage / Lincoln Tech News / Yahoo Finance",
+            date: "2026-04-28"
+        },
+        {
+            level: "GENERAL",
             company: "Hartford Insurance",
             cat: "Tenant",
-            headline: "Q1 2026: Net income +36% to $856M, diluted EPS $3.04; non-GAAP EPS $3.09 missed consensus; operating cash flow $1.045B",
-            summary: "The Hartford (NYSE: HIG) reported Q1 2026 on <b>April 23</b>: <b>net income $856M (+36% YoY)</b>, diluted EPS <b>$3.04</b>, revenue <b>$7.23B (+6.1% YoY)</b>. Non-GAAP EPS of <b>$3.09 missed consensus by ~8.8%</b>, which tempered the otherwise strong result. Operating cash flow was <b>$1.045B</b>. Strong underwriting performance across commercial lines drove the profit growth.",
-            relevance: "Hartford Insurance is a strong credit tenant — net income up 36% and cash flow of $1B+ underscore institutional financial health. The non-GAAP EPS miss was a market expectation issue rather than an operational problem. No lease concerns.",
-            source: "StockTitan / GuruFocus / Hartford IR",
+            headline: "Q1 2026: Net income +36% to $851M, diluted EPS $3.04; core ROE 20.3%; $617M returned to shareholders",
+            summary: "The Hartford (NYSE: HIG) reported Q1 2026 on <b>April 23</b>: <b>net income $851M (+36% YoY)</b>, diluted EPS <b>$3.04</b>, core earnings <b>$866M</b> at a <b>20.3% core ROE</b>. Total revenues <b>$7.23B (+6.1%)</b>. <b>Business Insurance</b> delivered 6% written premium growth at an 89.2 underlying combined ratio. <b>Personal Insurance</b> faced a 6% written premium decline (auto -10%, home +4%). Returned <b>$617M to shareholders</b> in Q1 ($450M buybacks + $167M dividends). Core EPS of $3.09 missed consensus by ~8.8%, but the underlying business remained strong.",
+            relevance: "Hartford is a strong credit tenant — net income +36% YoY and a 20.3% ROE underscore institutional financial health. The EPS miss was expectations-driven rather than operational. Capital return of $617M in a single quarter is a positive solvency signal. No lease concerns.",
+            source: "Hartford IR / GuruFocus / StockTitan / The Motley Fool",
             date: "2026-04-23"
         },
         {
             level: "GENERAL",
             company: "Lincoln Tech",
             cat: "Tenant",
-            headline: "Q1 2026 earnings call scheduled May 11; credit facility increased to $125M; stock +80% YTD; Rowlett TX campus on track for Q1 2027",
-            summary: "Lincoln Educational Services scheduled its <b>Q1 2026 earnings release and call for May 11</b> (before 9:30am ET). Context: FY2025 delivered <b>+19.7% YoY revenue</b>, and FY2026 guidance stands at <b>$580M–$590M revenue</b> and <b>$72M–$76M adjusted EBITDA</b>. Lincoln increased its <b>credit facility to $125M</b> to fund the ongoing campus expansion. Stock up <b>~80% YTD</b> to ~$44.10. New campuses: Houston TX (February 18), Levittown PA (relocated, 90,000 SF), with Hicksville NY (Q4 2026) and <b>Rowlett, TX (Q1 2027)</b> next. March 19 Investor Day outlined a path to <b>$850M revenue by 2030</b>.",
+            headline: "Q1 2026 earnings call scheduled May 11; credit facility increased to $125M; stock +84% YTD; Rowlett TX campus on track for Q1 2027",
+            summary: "Lincoln Educational Services scheduled its <b>Q1 2026 earnings release and call for May 11</b> (before 9:30am ET). Context: FY2025 delivered <b>+19.7% YoY revenue</b>, and FY2026 guidance stands at <b>$580M–$590M revenue</b> and <b>$72M–$76M adjusted EBITDA</b>. Lincoln increased its <b>credit facility to $125M</b> to fund the ongoing campus expansion. Stock up <b>~84% YTD</b> to ~$45.10. New campuses: Houston TX (February 18), Levittown PA (relocated, 90,000 SF), with Hicksville NY (Q4 2026) and <b>Rowlett, TX (Q1 2027)</b> next. March 19 Investor Day outlined a path to <b>$850M revenue by 2030</b>.",
             relevance: "Lincoln Tech remains the strongest tenant story in the portfolio. Expanded credit facility supports growth without leverage risk. The Rowlett, TX campus (Q1 2027) is directly in Jackson Shaw's market. Watch May 11 Q1 results for Q1 student starts update and Rowlett construction milestone.",
             source: "GlobeNewsWire / Lincoln Ed IR / SimplyWallSt",
             date: "2026-04-17"
+        },
+        {
+            level: "GENERAL",
+            company: "Triad Manufacturing",
+            cat: "Tenant",
+            headline: "St. Louis expansion announced: $1.78M investment, 32 new jobs, expanded wood production capacity for retail fixtures",
+            summary: "Triad Manufacturing announced an expansion of its <b>St. Louis operations</b> with a <b>$1.78M investment</b> and <b>32 new jobs</b>, expanding the company's wood production department for retail fixtures and furniture. Recent project work includes a <b>Verizon innovation lab</b> store, <b>Caleres / Famous Footwear NYC flagship</b> renovation, and a Love Coffee Bar build. Triad is one of only three companies in Missouri to achieve the Manufacturing Sustainability Certification and is the first official member of the Shop! Path Zero Community 2025.",
+            relevance: "Capacity expansion (rather than retrenchment) is a positive tenant signal. The investment confirms Triad's growth trajectory and underlying retail fixture demand pipeline. No lease concerns; if anything, the expansion may create additional Jackson Shaw opportunity if Triad needs incremental space.",
+            source: "Missouri Business Alert / Woodworking Network / KTTN / Triad Manufacturing",
+            date: "2026-04-22"
         },
         {
             level: "GENERAL",
